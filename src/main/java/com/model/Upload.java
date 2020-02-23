@@ -1,8 +1,6 @@
 package com.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -17,6 +15,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.model.dao.GaleriaDAO;
+import com.ruca.config.LogsManager;
 
 // Referenced classes of package com.model:
 //            PMF, Gallery
@@ -57,17 +56,15 @@ public class Upload extends HttpServlet {
 						dispatcher = req.getRequestDispatcher("WEB-INF/templates/deco.jsp");
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					LogsManager.showError(e.getMessage(), e);
 				}
 			} else {
-				GaleriaDAO galleryDao = new GaleriaDAO();
 				PersistenceManager pm = PMF.get().getPersistenceManager();
-				List galerias = new ArrayList();
 				Gallery principal = null;
 				try {
 					principal = GaleriaDAO.getGalleryByName(pm, "principal");
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					LogsManager.showError(e1.getMessage(), e1);
 				}
 				req.setAttribute("principal", principal);
 				dispatcher = req.getRequestDispatcher("WEB-INF/templates/admin.jsp");
@@ -79,10 +76,8 @@ public class Upload extends HttpServlet {
 	}
 
 	public void cargaGallery(HttpServletRequest req, HttpServletResponse resp, String galeria) throws Exception {
-		GaleriaDAO galleryDao = new GaleriaDAO();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Gallery gallery = null;
-		gallery = GaleriaDAO.getGalleryByName(pm, galeria);
+		Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
 		req.setAttribute("galeria", gallery);
 	}
 }

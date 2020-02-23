@@ -17,6 +17,7 @@ import com.model.Gallery;
 import com.model.MediaObject;
 import com.model.PMF;
 import com.model.dao.GaleriaDAO;
+import com.ruca.config.LogsManager;
 
 public class RucaServlet extends HttpServlet {
 
@@ -152,7 +153,7 @@ public class RucaServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogsManager.showError(e.getMessage(), e);
 		}
 	}
 
@@ -173,7 +174,7 @@ public class RucaServlet extends HttpServlet {
 				gallery.getFotos().remove(fotoBorrar);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogsManager.showError(e.getMessage(), e);
 		}
 		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).toString());
 	}

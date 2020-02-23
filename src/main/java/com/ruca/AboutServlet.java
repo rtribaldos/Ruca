@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.ruca.config.LogsManager;
 
 // Referenced classes of package com.ruca:
 //            AdminServlet
@@ -35,7 +36,7 @@ public class AboutServlet extends HttpServlet {
 			}
 			dispatcher.forward(req, resp);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogsManager.showError(e.getMessage(), e);
 		}
 	}
 

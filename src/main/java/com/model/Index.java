@@ -29,6 +29,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.model.dao.GaleriaDAO;
+import com.ruca.config.LogsManager;
 
 @SuppressWarnings("serial")
 public class Index extends HttpServlet {
@@ -59,7 +60,7 @@ public class Index extends HttpServlet {
 		try {
 			galerias = galleryDao.getGalerias(pm);
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			LogsManager.showError(e1.getMessage(), e1);
 		}
 
 		if (stIdGal != null && !stIdGal.isEmpty() && !stIdGal.equals("A")) {
@@ -67,7 +68,7 @@ public class Index extends HttpServlet {
 				Gallery galeria = GaleriaDAO.getGaleria(pm, Long.parseLong(stIdGal));
 				results.addAll(galeria.getFotos());
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogsManager.showError(e.getMessage(), e);
 			}
 		} else {
 			Gallery galeria = null;
@@ -77,8 +78,7 @@ public class Index extends HttpServlet {
 					results.addAll(galeria.getFotos());
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LogsManager.showError(e.getMessage(), e);
 			}
 		}
 

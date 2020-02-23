@@ -12,6 +12,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.model.Gallery;
 import com.model.PMF;
+import com.ruca.config.LogsManager;
 
 public class AdminServlet extends HttpServlet {
 	
@@ -47,7 +48,7 @@ public class AdminServlet extends HttpServlet {
 			dispatcher = req.getRequestDispatcher(destino);
 			dispatcher.forward(req, resp);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogsManager.showError(e.getMessage(), e);
 		}
 	}
 
@@ -68,7 +69,7 @@ public class AdminServlet extends HttpServlet {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("panel.jsp");
 			dispatcher.forward(req, resp);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogsManager.showError(e.getMessage(), e);
 		}
 	}
 

@@ -3,6 +3,8 @@ package com.model;
 import com.google.appengine.api.blobstore.*;
 import com.google.appengine.api.users.*;
 import com.model.dao.GaleriaDAO;
+import com.ruca.config.LogsManager;
+
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.*;
@@ -89,8 +91,7 @@ public class UploadPost extends HttpServlet {
 				gallery = GaleriaDAO.createGallery(pm, op);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LogsManager.showError(e.getMessage(), e);
 		}
 
 		MediaObject mediaObj = new MediaObject(user, blobKey, creation, contentType, fileName, size, title, description,
