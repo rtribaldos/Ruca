@@ -28,228 +28,219 @@ import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.users.User;
 
-@PersistenceCapable(identityType = IdentityType.APPLICATION) 
-public class MediaObject{
-  @PrimaryKey
-  @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-  private Key key;
+@PersistenceCapable(identityType = IdentityType.APPLICATION)
+public class MediaObject {
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key key;
 
-  @Persistent
-  private User owner;
+	@Persistent
+	private User owner;
 
-  @Persistent
-  private BlobKey blob;
+	@Persistent
+	private BlobKey blob;
 
-  @Persistent
-  private Date creation;
+	@Persistent
+	private Date creation;
 
-  @Persistent
-  private String contentType;
+	@Persistent
+	private String contentType;
 
-  @Persistent
-  private String filename;
+	@Persistent
+	private String filename;
 
-  @Persistent
-  private long size;
+	@Persistent
+	private long size;
 
-  @Persistent
-  private String title;
+	@Persistent
+	private String title;
 
-  @Persistent
-  private String description;
+	@Persistent
+	private String description;
 
-  @Persistent
-  private boolean isPublic;
-  
-  @Persistent
-  private boolean isPrincipal;
-  
-  @Persistent
-  private Gallery gallery;
-  
-  @Persistent
-  private String textAntes;
+	@Persistent
+	private boolean isPublic;
 
-  @Persistent
-  private String textDespues;
-  
-  @Persistent
-  private int orden;
-  
+	@Persistent
+	private boolean isPrincipal;
 
-  private static final List<String> IMAGE_TYPES = Arrays.asList("image/png",
-    "image/jpeg", "image/tiff", "image/gif", "image/bmp");
+	@Persistent
+	private Gallery gallery;
 
+	@Persistent
+	private String textAntes;
 
-public MediaObject(User owner, BlobKey blob, Date creationTime, String contentType, String filename, long size, 
-          String title, String description, boolean isPublic, Gallery gallery, boolean isPrincipal, String textAntes, 
-          String testDespues, int orden)
-  {
-      this.blob = blob;
-      this.owner = owner;
-      this.creation = creationTime;
-      this.contentType = contentType;
-      this.filename = filename;
-      this.size = size;
-      this.title = title;
-      this.description = description;
-      this.isPublic = isPublic;
-      this.isPrincipal = isPrincipal;
-      this.gallery = gallery;
-      this.textAntes = textAntes;
-      this.textDespues = testDespues;
-      this.orden = orden;
-  }
+	@Persistent
+	private String textDespues;
 
+	@Persistent
+	private int orden;
 
-  public Key getKey() {
-    return key;
-  }
+	private static final List<String> IMAGE_TYPES = Arrays.asList("image/png", "image/jpeg", "image/tiff", "image/gif",
+			"image/bmp");
 
-  public User getOwner() {
-    return owner;
-  }
+	public MediaObject(User owner, BlobKey blob, Date creationTime, String contentType, String filename, long size,
+			String title, String description, boolean isPublic, Gallery gallery, boolean isPrincipal, String textAntes,
+			String testDespues, int orden) {
+		this.blob = blob;
+		this.owner = owner;
+		this.creation = creationTime;
+		this.contentType = contentType;
+		this.filename = filename;
+		this.size = size;
+		this.title = title;
+		this.description = description;
+		this.isPublic = isPublic;
+		this.isPrincipal = isPrincipal;
+		this.gallery = gallery;
+		this.textAntes = textAntes;
+		this.textDespues = testDespues;
+		this.orden = orden;
+	}
 
-  public Date getCreationTime() {
-    return creation;
-  }
+	public Key getKey() {
+		return key;
+	}
 
-  public boolean isPublic() {
-    return isPublic;
-  }
+	public User getOwner() {
+		return owner;
+	}
 
-  public String getDescription() {
-    return description;
-  }
+	public Date getCreationTime() {
+		return creation;
+	}
 
-  public String getTitle() {
-    return title;
-  }
+	public boolean isPublic() {
+		return isPublic;
+	}
 
-  public String getFilename() {
-    return filename;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public long getSize() {
-    return size;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  public String getContentType() {
-    if (contentType ==  null) {
-      return "text/plain";
-    }
-    return contentType;
-  }
+	public String getFilename() {
+		return filename;
+	}
 
-  public String getURLPath() {
-    String key = blob.getKeyString();
-    return "/resource?key=" + key;
-  }
+	public long getSize() {
+		return size;
+	}
 
-  public String getDisplayURL() {
-    String key = blob.getKeyString();
-    return "/display?key=" + key;
-  }
+	public String getContentType() {
+		if (contentType == null) {
+			return "text/plain";
+		}
+		return contentType;
+	}
 
-  public boolean isImage() {
-    return IMAGE_TYPES.contains(getContentType());
-  }
+	public String getURLPath() {
+		String key = blob.getKeyString();
+		return "/resource?key=" + key;
+	}
 
-public BlobKey getBlob() {
-	return blob;
-}
+	public String getDisplayURL() {
+		String key = blob.getKeyString();
+		return "/display?key=" + key;
+	}
 
-public void setBlob(BlobKey blob) {
-	this.blob = blob;
-}
+	public boolean isImage() {
+		return IMAGE_TYPES.contains(getContentType());
+	}
 
-public Date getCreation() {
-	return creation;
-}
+	public BlobKey getBlob() {
+		return blob;
+	}
 
-public void setCreation(Date creation) {
-	this.creation = creation;
-}
+	public void setBlob(BlobKey blob) {
+		this.blob = blob;
+	}
 
-public boolean isPrincipal() {
-	return isPrincipal;
-}
+	public Date getCreation() {
+		return creation;
+	}
 
-public void setPrincipal(boolean isPrincipal) {
-	this.isPrincipal = isPrincipal;
-}
+	public void setCreation(Date creation) {
+		this.creation = creation;
+	}
 
-public Gallery getGallery() {
-	return gallery;
-}
+	public boolean isPrincipal() {
+		return isPrincipal;
+	}
 
-public void setGallery(Gallery gallery) {
-	this.gallery = gallery;
-}
+	public void setPrincipal(boolean isPrincipal) {
+		this.isPrincipal = isPrincipal;
+	}
 
+	public Gallery getGallery() {
+		return gallery;
+	}
 
-public String getTextAntes() {
-	return textAntes;
-}
+	public void setGallery(Gallery gallery) {
+		this.gallery = gallery;
+	}
 
-public void setTextAntes(String textAntes) {
-	this.textAntes = textAntes;
-}
+	public String getTextAntes() {
+		return textAntes;
+	}
 
-public String getTextDespues() {
-	return textDespues;
-}
+	public void setTextAntes(String textAntes) {
+		this.textAntes = textAntes;
+	}
 
-public void setTextDespues(String textDespues) {
-	this.textDespues = textDespues;
-}
+	public String getTextDespues() {
+		return textDespues;
+	}
 
-public static List<String> getImageTypes() {
-	return IMAGE_TYPES;
-}
+	public void setTextDespues(String textDespues) {
+		this.textDespues = textDespues;
+	}
 
-public void setKey(Key key) {
-	this.key = key;
-}
+	public static List<String> getImageTypes() {
+		return IMAGE_TYPES;
+	}
 
-public void setOwner(User owner) {
-	this.owner = owner;
-}
+	public void setKey(Key key) {
+		this.key = key;
+	}
 
-public void setContentType(String contentType) {
-	this.contentType = contentType;
-}
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
 
-public void setFilename(String filename) {
-	this.filename = filename;
-}
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
 
-public void setSize(long size) {
-	this.size = size;
-}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
-public void setTitle(String title) {
-	this.title = title;
-}
+	public void setSize(long size) {
+		this.size = size;
+	}
 
-public void setDescription(String description) {
-	this.description = description;
-}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-public void setPublic(boolean isPublic) {
-	this.isPublic = isPublic;
-}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
+	public void setPublic(boolean isPublic) {
+		this.isPublic = isPublic;
+	}
 
-public int getOrden() {
-	return orden;
-}
+	public int getOrden() {
+		return orden;
+	}
 
-
-public void setOrden(int orden) {
-	this.orden = orden;
-}
-
-
+	public void setOrden(int orden) {
+		this.orden = orden;
+	}
 
 }

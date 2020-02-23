@@ -31,59 +31,51 @@ import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.Transform;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 
 @SuppressWarnings("serial")
 public class Resource extends HttpServlet {
-  private BlobstoreService blobstoreService =
-    BlobstoreServiceFactory.getBlobstoreService();
+	private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
-  public void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-    BlobKey blobKey = new BlobKey(req.getParameter("key"));
+		BlobKey blobKey = new BlobKey(req.getParameter("key"));
 
-    PersistenceManager pm = PMF.get().getPersistenceManager();
+		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-    Query query = pm.newQuery(MediaObject.class, "blob == blobParam");
-    query.declareImports("import " + "com.google.appengine.api.blobstore.BlobKey");
-    query.declareParameters("BlobKey blobParam");
+		Query query = pm.newQuery(MediaObject.class, "blob == blobParam");
+		query.declareImports("import " + "com.google.appengine.api.blobstore.BlobKey");
+		query.declareParameters("BlobKey blobParam");
 
-    List<MediaObject> results = (List<MediaObject>) query.execute(blobKey);
-    if (results.isEmpty()) {
-      resp.sendRedirect("/?error=" +
-        URLEncoder.encode("BlobKey does not exist", "UTF-8"));
-      return;
-    }
+		List<MediaObject> results = (List<MediaObject>) query.execute(blobKey);
+		if (results.isEmpty()) {
+			resp.sendRedirect("/?error=" + URLEncoder.encode("BlobKey does not exist", "UTF-8"));
+			return;
+		}
 
-    MediaObject result = results.get(0);
-   /* if (!result.isPublic()) {
-      UserService userService = UserServiceFactory.getUserService();
-      User user = userService.getCurrentUser();
+		MediaObject result = results.get(0);
+		/*
+		 * if (!result.isPublic()) { UserService userService =
+		 * UserServiceFactory.getUserService(); User user =
+		 * userService.getCurrentUser();
+		 * 
+		 * if (!result.getOwner().equals(user)) { resp.sendRedirect("/?error=" +
+		 * URLEncoder.encode("Not authorized to access", "UTF-8")); return; } }
+		 */
 
-      if (!result.getOwner().equals(user)) {
-        resp.sendRedirect("/?error=" +
-          URLEncoder.encode("Not authorized to access", "UTF-8"));
-        return;
-      }
-    } */
+		String rotation = req.getParameter("rotate");
+		if (rotation != null && !"".equals(rotation) && !"null".equals(rotation)) {
+			int degrees = Integer.parseInt(rotation);
 
-    String rotation = req.getParameter("rotate");
-    if (rotation != null && !"".equals(rotation) && !"null".equals(rotation)) {
-      int degrees = Integer.parseInt(rotation);
+			ImagesService imagesService = ImagesServiceFactory.getImagesService();
+			Image image = ImagesServiceFactory.makeImageFromBlob(blobKey);
+			Transform rotate = ImagesServiceFactory.makeRotate(degrees);
+			Image newImage = imagesService.applyTransform(rotate, image);
+			byte[] imgbyte = newImage.getImageData();
 
-      ImagesService imagesService = ImagesServiceFactory.getImagesService();
-      Image image = ImagesServiceFactory.makeImageFromBlob(blobKey);
-      Transform rotate = ImagesServiceFactory.makeRotate(degrees);
-      Image newImage = imagesService.applyTransform(rotate, image);
-      byte[] imgbyte = newImage.getImageData();
-
-      resp.setContentType(result.getContentType());
-      resp.getOutputStream().write(imgbyte);
-      return;
-    }
-    blobstoreService.serve(blobKey, resp);
-  }
+			resp.setContentType(result.getContentType());
+			resp.getOutputStream().write(imgbyte);
+			return;
+		}
+		blobstoreService.serve(blobKey, resp);
+	}
 }
