@@ -9,8 +9,6 @@
  
   Gallery galeria = (Gallery) request.getAttribute("galeria");
   ArrayList<MediaObject> fotos = (ArrayList<MediaObject>) request.getAttribute("fotos");
-  
-  if(galeria != null)  System.out.println(galeria.getName());
   int contador=0;
 %>
 

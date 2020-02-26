@@ -35,7 +35,8 @@ public class Upload extends HttpServlet {
 		User user = userService.getCurrentUser();
 		RequestDispatcher dispatcher = null;
 		if (user.getEmail().equalsIgnoreCase("raultribaldos@gmail.com")
-				|| user.getEmail().equalsIgnoreCase("gracialafamilia@gmail.com")) {
+				|| user.getEmail().equalsIgnoreCase("gracialafamilia@gmail.com")
+				|| user.getEmail().equalsIgnoreCase("alexei_lescaylle@yahoo.es")) {
 			String authURL = userService.createLogoutURL("/");
 			String uploadURL = blobstoreService.createUploadUrl("/post");
 			req.setAttribute("uploadURL", uploadURL);

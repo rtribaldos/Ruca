@@ -9,8 +9,6 @@
   String vivienda = (String) request.getAttribute("vivienda");
   String nomVivienda = (String) request.getAttribute("desc");
   Gallery galeria = (Gallery) request.getAttribute("galeria");
- 
-  if(galeria != null)  System.out.println(galeria.getName());
   int contador=0;
 %>
 

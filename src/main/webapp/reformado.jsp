@@ -14,8 +14,6 @@
   if(tieneAntes==null) tieneAntes="";
   if(antes != null && !"".equals(antes)) antes=" > ANTES DE REFORMAR";
   else antes="";
- 
-  if(galeria != null)  System.out.println(galeria.getName());
   int contador=0;
 %>
 

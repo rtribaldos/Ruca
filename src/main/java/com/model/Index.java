@@ -45,17 +45,12 @@ public class Index extends HttpServlet {
 		GaleriaDAO galleryDao = new GaleriaDAO();
 
 		String stIdGal = req.getParameter("galeria");
-		// System.out.println("Galeria solicitada: " + stIdGal);
 
 		// Fotos a Mostrar
 		List<MediaObject> results = new ArrayList<MediaObject>();
 
 		// Colección de Galerias
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		/*
-		 * Query query = pm.newQuery(Gallery.class); List<Gallery> galerias =
-		 * (List<Gallery>) query.execute(user);
-		 */
 		List<Gallery> galerias = new ArrayList<Gallery>();
 		try {
 			galerias = galleryDao.getGalerias(pm);
@@ -91,11 +86,13 @@ public class Index extends HttpServlet {
 		req.setAttribute("galerias", galerias);
 		req.setAttribute("authURL", authURL);
 		req.setAttribute("user", user);
+
 		RequestDispatcher dispatcher = null;
-		if (stIdGal != null && !stIdGal.isEmpty())
+		if (stIdGal != null && !stIdGal.isEmpty()) {
 			dispatcher = req.getRequestDispatcher("galerias.jsp");
-		else
+		} else {
 			dispatcher = req.getRequestDispatcher("index.jsp");
+		}
 		dispatcher.forward(req, resp);
 	}
 }

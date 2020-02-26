@@ -190,10 +190,9 @@ public class RucaServlet extends HttpServlet {
 	}
 
 	class FotoComparator implements Comparator<MediaObject> {
+		
 		@Override
 		public int compare(MediaObject a, MediaObject b) {
-			System.out.println("comparando x orden");
-			// return a.getTitle().compareToIgnoreCase(b.getTitle());
 			return a.getOrden() - b.getOrden();
 		}
 	}

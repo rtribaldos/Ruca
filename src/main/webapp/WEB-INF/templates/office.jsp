@@ -6,10 +6,7 @@
   User user = (User) request.getAttribute("user");
   String authURL = (String) request.getAttribute("authURL");
   String uploadURL = (String) request.getAttribute("uploadURL");
-  System.out.println("url Upload: " + uploadURL);
   Gallery gallery = (Gallery) request.getAttribute("galeria");
-  
-  if(gallery != null)  System.out.println(gallery.getName());
   int contador=0;
 %>
 <!DOCTYPE html>

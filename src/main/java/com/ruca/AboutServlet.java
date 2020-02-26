@@ -29,7 +29,6 @@ public class AboutServlet extends HttpServlet {
 			req.setAttribute("authURL", authURL);
 			req.setAttribute("user", user);
 			String op = req.getParameter("op");
-			System.out.println((new StringBuilder("Op:")).append(op).toString());
 			RequestDispatcher dispatcher = req.getRequestDispatcher("reformas.jsp");
 			if (op != null && op.equals("reforma")) {
 				dispatcher = req.getRequestDispatcher("reformando.jsp");
