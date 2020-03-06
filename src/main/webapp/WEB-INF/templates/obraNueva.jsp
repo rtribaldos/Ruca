@@ -75,25 +75,25 @@
                     <form id="form" action="<%= uploadURL%>" method="POST" enctype="multipart/form-data">
                       <fieldset id="personal">
                         <legend>Subir Foto</legend>
-                      	<label for="lastname">Nombre : </label> 
+                      	<label for="lastname">Nombre: </label> 
                         <input name="title" id="title" type="text" tabindex="1" size="30" />
                         <br />
-                        <label for="firstname">Descripci&oacute;n: : </label>
+                        <label for="firstname">Descripci&oacute;n: </label>
                         <input name="description" id="description" type="text" tabindex="2" size="60"/>
                         <br />
-                        <label for="email">Foto : </label>
+                        <label for="email">Foto: </label>
                         <input type="file" name="file">
-                        <br />
-                        <label for="prinxipal">Principal : </label> 
+                        <div class="padding5"></div>
+                        <label for="prinxipal">Principal: </label> 
                         <input name="principal" id="yes" type="checkbox" value="yes" tabindex="35" />
                         <input type="hidden" name="op" value="obraNueva" />
                      </fieldset>
                      
                      
-                      <div align="center">
+                     <div align="center">
                       <input id="button1" type="submit" value="Guardar" /> 
                       <input id="button2" type="reset" />
-                      </div>
+                     </div>
                     </form>
 
                 </div>

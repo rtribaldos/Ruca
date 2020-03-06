@@ -376,3 +376,7 @@ form#form #button1:hover, form#form #button2:hover {
 .report_seo{background:transparent url(../img/icons/report_link.png) no-repeat left;}
 .modules{background:transparent url(../img/icons/bricks.png) no-repeat left;}
 .modules_manage{background:transparent url(../img/icons/bricks_gear.png) no-repeat left;}
+
+.padding5 {
+	padding-bottom: 5px;
+}

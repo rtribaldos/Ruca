@@ -76,10 +76,10 @@
                     <form id="form" action="<%= uploadURL%>" method="POST" enctype="multipart/form-data">
                       <fieldset id="personal">
                         <legend>Subir Foto</legend>
-                        <label for="lastname">Nombre : </label> 
+                        <label for="lastname">Nombre: </label> 
                         <input name="title" id="title" type="text" tabindex="1" size="30" />
                         <br />
-                        <label for="firstname">Descripci&oacute;n: : </label>
+                        <label for="firstname">Descripci&oacute;n: </label>
                         <input name="description" id="description" type="text" tabindex="2" size="60"/>
                         <br />
                         <label for="email">Foto Principal: </label>
@@ -91,10 +91,10 @@
                      </fieldset>
                      
                      
-                      <div align="center">
+                     <div align="center">
                       <input id="button1" type="submit" value="Guardar" /> 
                       <input id="button2" type="reset" />
-                      </div>
+                     </div>
                     </form>
 
                 </div>
