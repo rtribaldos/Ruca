@@ -44,8 +44,9 @@
                             	<th><a href="#">Nombre</a></th>
                             	<th><a href="#">Principal</a></th>
                             	<th><a href="#">Descripcion</a></th>
-                            	<th>Foto</th>
-                            	<th width="60px">Borrar</th>
+                            	<th><a href="#">Foto</a></th>
+								<th><a href="#">Orden</a></th>
+								<th width="60px"><a href="#">Borrar</a></th>
                             </tr>
 						</thead>
 						<tbody>
@@ -57,9 +58,10 @@
 							<tr>
                             	<td class="a-center"><%=++contador%></td>
                             	<td><a href="#"><%=foto.getTitle() %></a></td>
-                            	<td><center><a href="#"><%=foto.isPrincipal() %></a></center></td>
+                            	<td class="a-center"><a href="#"><%=foto.isPrincipal() %></a></td>
                             	<td><a href="#"><%=foto.getDescription() %></a></td>
                             	<td><a href="#"><%=foto.getFilename()%></a></td>
+                            	<td class="a-center"><a href="#"><%=foto.getOrden()%></a></td>
                             	<td><a href="<%=urlBorrado%>"><img src="img/icons/user_delete.png" title="Delete user" width="16" height="16" /></a></td>
                             </tr>
 							<%

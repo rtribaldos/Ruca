@@ -43,8 +43,9 @@
                             	<th width="40px"><a href="#">ID<img src="img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" /></a></th>
                             	<th><a href="#">Nombre</a></th>
                             	<th><a href="#">Descripci&oacute;n</a></th>
-                            	<th>Foto Principal</th>
-                            	<th width="60px">Borrar</th>
+                            	<th><a href="#">Foto principal</a></th>
+								<th><a href="#">Orden</a></th>
+								<th width="60px"><a href="#">Borrar</a></th>
                             </tr>
 						</thead>
 						<tbody>
@@ -60,6 +61,7 @@
                             	<td><a href="#"><%=foto.getTitle() %></a></td>
                             	<td><a href="#"><%=foto.getDescription() %></a></td>
                             	<td><a href="#"><%=foto.getFilename()%></a></td>
+                            	<td class="a-center"><a href="#"><%=foto.getOrden()%></a></td>
                             	<td><a href="<%=urlBorrado%>"><img src="img/icons/user_delete.png" title="Delete user" width="16" height="16" /></a></td>
                             </tr>
 							<%
@@ -87,7 +89,6 @@
                         <br />
                         <input type="hidden" name="principal" id="yes" value="yes" />
                         <input type="hidden" name="op" value="decoracion" />
-                        <input type="hidden" name="orden" value="<%=contador%>" />
                      </fieldset>
                      
                      

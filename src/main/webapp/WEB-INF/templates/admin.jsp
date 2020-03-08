@@ -56,14 +56,19 @@
 										align="absmiddle" /></a></th>
 								<th><a href="#">Nombre</a></th>
 								<th><a href="#">Descripcion</a></th>
-								<th>Foto</th>
-								<th width="60px">Borrar</th>
+								<th><a href="#">Foto</a></th>
+								<th><a href="#">Orden</a></th>
+								<th width="60px"><a href="#">Borrar</a></th>
 							</tr>
 						</thead>
 						<tbody>
 							<%
 								if (gallery != null) {
 									for (MediaObject foto : gallery.getFotos()) {
+										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getFilename()
+											+ "&ordenActual=" + foto.getOrden();
+										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getFilename()
+											+ "&ordenActual=" + foto.getOrden();
 										String urlBorrado = "/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
 							%>
 							<tr>
@@ -71,7 +76,18 @@
 								<td><a href="#"><%=foto.getTitle()%></a></td>
 								<td><a href="#"><%=foto.getDescription()%></a></td>
 								<td><a href="#"><%=foto.getFilename()%></a></td>
-								<td><a href="<%=urlBorrado%>"><img
+								
+								<td class="a-center">
+									<%=foto.getOrden()%>
+									<a href="<%=urlSortUp%>">
+										<img src="img/icons/arrow_up_mini.gif" width="16" height="16" align="absmiddle" />
+									</a>
+									<a href="<%=urlSortDown%>">
+										<img src="img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" />
+									</a>									
+								</td>
+								
+								<td class="a-center"><a href="<%=urlBorrado%>"><img
 										src="img/icons/user_delete.png" title="Delete user" width="16"
 										height="16" /></a></td>
 							</tr>

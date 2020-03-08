@@ -50,7 +50,7 @@ public class MediaObject {
 	private String filename;
 
 	@Persistent
-	private long size;
+	private Long size;
 
 	@Persistent
 	private String title;
@@ -59,10 +59,10 @@ public class MediaObject {
 	private String description;
 
 	@Persistent
-	private boolean isPublic;
+	private Boolean isPublic;
 
 	@Persistent
-	private boolean isPrincipal;
+	private Boolean isPrincipal;
 
 	@Persistent
 	private Gallery gallery;
@@ -74,14 +74,14 @@ public class MediaObject {
 	private String textDespues;
 
 	@Persistent
-	private int orden;
+	private Integer orden;
 
 	private static final List<String> IMAGE_TYPES = Arrays.asList("image/png", "image/jpeg", "image/tiff", "image/gif",
 			"image/bmp");
 
-	public MediaObject(User owner, BlobKey blob, Date creationTime, String contentType, String filename, long size,
-			String title, String description, boolean isPublic, Gallery gallery, boolean isPrincipal, String textAntes,
-			String testDespues, int orden) {
+	public MediaObject(User owner, BlobKey blob, Date creationTime, String contentType, String filename, Long size,
+			String title, String description, Boolean isPublic, Gallery gallery, Boolean isPrincipal, String textAntes,
+			String testDespues, Integer orden) {
 		this.blob = blob;
 		this.owner = owner;
 		this.creation = creationTime;
@@ -110,7 +110,7 @@ public class MediaObject {
 		return creation;
 	}
 
-	public boolean isPublic() {
+	public Boolean isPublic() {
 		return isPublic;
 	}
 
@@ -126,7 +126,7 @@ public class MediaObject {
 		return filename;
 	}
 
-	public long getSize() {
+	public Long getSize() {
 		return size;
 	}
 
@@ -147,7 +147,7 @@ public class MediaObject {
 		return "/display?key=" + key;
 	}
 
-	public boolean isImage() {
+	public Boolean isImage() {
 		return IMAGE_TYPES.contains(getContentType());
 	}
 
@@ -167,11 +167,11 @@ public class MediaObject {
 		this.creation = creation;
 	}
 
-	public boolean isPrincipal() {
+	public Boolean isPrincipal() {
 		return isPrincipal;
 	}
 
-	public void setPrincipal(boolean isPrincipal) {
+	public void setPrincipal(Boolean isPrincipal) {
 		this.isPrincipal = isPrincipal;
 	}
 
@@ -219,7 +219,7 @@ public class MediaObject {
 		this.filename = filename;
 	}
 
-	public void setSize(long size) {
+	public void setSize(Long size) {
 		this.size = size;
 	}
 
@@ -231,15 +231,15 @@ public class MediaObject {
 		this.description = description;
 	}
 
-	public void setPublic(boolean isPublic) {
+	public void setPublic(Boolean isPublic) {
 		this.isPublic = isPublic;
 	}
 
-	public int getOrden() {
+	public Integer getOrden() {
 		return orden;
 	}
 
-	public void setOrden(int orden) {
+	public void setOrden(Integer orden) {
 		this.orden = orden;
 	}
 

@@ -35,7 +35,7 @@ public class Display extends HttpServlet {
 		List results = (List) query.execute(blobKey);
 		if (results.isEmpty()) {
 			resp.sendRedirect((new StringBuilder("/?error="))
-					.append(URLEncoder.encode("BlobKey do`es not exist", "UTF-8")).toString());
+					.append(URLEncoder.encode("BlobKey does not exist", "UTF-8")).toString());
 			return;
 		}
 		UserService userService = UserServiceFactory.getUserService();

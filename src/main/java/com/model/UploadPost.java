@@ -44,18 +44,16 @@ public class UploadPost extends HttpServlet {
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
 
 		if (blobs.keySet().isEmpty()) {
-			resp.sendRedirect(
-					(new StringBuilder("/?error=")).append(URLEncoder.encode("No file uploaded", "UTF-8")).toString());
+			resp.sendRedirect((new StringBuilder("/?error=")).append(URLEncoder.encode("No file uploaded", "UTF-8")).toString());
 			return;
 		}
 
-		Iterator names = blobs.keySet().iterator();
+		Iterator<?> names = blobs.keySet().iterator();
 		String blobName = (String) names.next();
 		blobKey = blobs.get(blobName).get(0);
 		if (user == null) {
 			blobstoreService.delete(new BlobKey[] { blobKey });
-			resp.sendRedirect((new StringBuilder("/?error="))
-					.append(URLEncoder.encode("Must be logged in to upload", "UTF-8")).toString());
+			resp.sendRedirect((new StringBuilder("/?error=")).append(URLEncoder.encode("Must be logged in to upload", "UTF-8")).toString());
 			return;
 		}
 		BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
@@ -76,8 +74,7 @@ public class UploadPost extends HttpServlet {
 		if (anterior == null) {
 			anterior = "";
 		}
-		orden = Integer.parseInt(req.getParameter("orden"));
-
+		
 		PersistenceManager pm;
 		Transaction tx;
 		pm = PMF.get().getPersistenceManager();
@@ -92,6 +89,10 @@ public class UploadPost extends HttpServlet {
 			}
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);
+		}
+		
+		if (gallery != null && gallery.getFotos() != null) {
+			orden = gallery.getFotos().size() + 1;
 		}
 
 		MediaObject mediaObj = new MediaObject(user, blobKey, creation, contentType, fileName, size, title, description,
@@ -112,6 +113,5 @@ public class UploadPost extends HttpServlet {
 		} else {
 			resp.sendRedirect("/upload");
 		}
-
 	}
 }

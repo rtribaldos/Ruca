@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.jdo.annotations.Element;
@@ -41,6 +42,10 @@ public class Gallery {
 	}
 
 	public List<MediaObject> getFotos() {
+		List<MediaObject> fotos = this.fotos;
+		if (fotos != null) {
+			fotos.sort(Comparator.comparing(MediaObject::getOrden));
+		}
 		return fotos;
 	}
 
@@ -56,5 +61,5 @@ public class Gallery {
     public void addPhoto(MediaObject foto){
     	this.fotos.add(foto);
     }
-	
+    
 }

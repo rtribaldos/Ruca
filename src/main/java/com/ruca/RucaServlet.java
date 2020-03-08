@@ -44,10 +44,18 @@ public class RucaServlet extends HttpServlet {
 			boolean encOficinas = false;
 			RequestDispatcher dispatcher = null;
 			boolean tieneAntes = false;
-
+			
+			String subirOrden = req.getParameter("subirOrden");
+			String bajarOrden = req.getParameter("bajarOrden");
+			String ordenActual = req.getParameter("ordenActual");
+			
 			if (gallery != null) {
 				if (borraFileName != null && !borraFileName.equals("")) {
 					borra(req, resp, gallery, borraFileName);
+				} else if (subirOrden != null && !subirOrden.equals("")) {
+					subirOrden(req, resp, gallery, subirOrden, ordenActual);
+				} else if (bajarOrden != null && !bajarOrden.equals("")) {
+					bajarOrden(req, resp, gallery, bajarOrden, ordenActual);
 				} else {
 					//GaleriaDAO galleryDao = new GaleriaDAO();
 					PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -99,7 +107,7 @@ public class RucaServlet extends HttpServlet {
 					}
 
 					// Ordenacion de fotos
-					Collections.sort(photos, new FotoComparator());
+					photos.sort(Comparator.comparing(MediaObject::getOrden));
 
 					req.setAttribute("galeria", galeria);
 					req.setAttribute("fotos", photos);
@@ -188,12 +196,51 @@ public class RucaServlet extends HttpServlet {
 		}
 		req.setAttribute("galeria", gallery);
 	}
-
-	class FotoComparator implements Comparator<MediaObject> {
-		
-		@Override
-		public int compare(MediaObject a, MediaObject b) {
-			return a.getOrden() - b.getOrden();
+	
+	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String filename, 
+			String ordenActual) throws IOException {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			Integer currentOrden = ordenActual != null ? Integer.valueOf(ordenActual) : null;
+			Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
+			if (currentOrden != null && currentOrden > 1 && gallery != null && gallery.getFotos() != null) {
+				for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
+					MediaObject foto = (MediaObject) iterator.next();
+					if (foto.getOrden().equals(currentOrden - 1)) {
+						foto.setOrden(currentOrden);
+					}					
+					if (foto.getFilename().equals(filename)) {
+						foto.setOrden(currentOrden - 1);
+					}
+				}
+			}			
+		} catch (Exception e) {
+			LogsManager.showError(e.getMessage(), e);
 		}
+		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).toString());
 	}
+	
+	public void bajarOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String filename, 
+			String ordenActual) throws IOException {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			Integer currentOrden = ordenActual != null ? Integer.valueOf(ordenActual) : null;
+			Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
+			if (currentOrden != null && gallery != null && gallery.getFotos() != null && currentOrden < gallery.getFotos().size()) {
+				for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
+					MediaObject foto = (MediaObject) iterator.next();
+					if (foto.getOrden().equals(currentOrden + 1)) {
+						foto.setOrden(currentOrden);
+					}					
+					if (foto.getFilename().equals(filename)) {
+						foto.setOrden(currentOrden + 1);
+					}
+				}
+			}
+		} catch (Exception e) {
+			LogsManager.showError(e.getMessage(), e);
+		}
+		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).toString());
+	}
+	
 }
