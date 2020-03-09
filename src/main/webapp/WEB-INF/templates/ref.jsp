@@ -56,11 +56,12 @@
 							if (gallery != null && gallery.getFotos() != null) {
 								for (int i = 0; i < gallery.getFotos().size(); i++) {
 									MediaObject foto = gallery.getFotoByOrder(i, ordenar);
-									String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getFilename()
-										+ "&ordenActual=" + foto.getOrden();
-									String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getFilename()
-										+ "&ordenActual=" + foto.getOrden();
-									String urlBorrado="/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
+									if (foto != null) {
+										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getFilename()
+											+ "&ordenActual=" + foto.getOrden();
+										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getFilename()
+											+ "&ordenActual=" + foto.getOrden();
+										String urlBorrado="/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
 							%>
 							<tr>
                             	<td class="a-center"><%=++contador%></td>
@@ -85,6 +86,7 @@
 		                    	</td>
                             </tr>
 							<%
+									}
 								}
 							}
 							%>

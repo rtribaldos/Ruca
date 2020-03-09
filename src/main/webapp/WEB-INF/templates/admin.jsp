@@ -64,9 +64,10 @@
 						</thead>
 						<tbody>
 							<%
-								if (gallery != null && gallery.getFotos() != null) {
-									for (int i = 0; i < gallery.getFotos().size(); i++) {
-										MediaObject foto = gallery.getFotoByOrder(i, ordenar);
+							if (gallery != null && gallery.getFotos() != null) {
+								for (int i = 0; i < gallery.getFotos().size(); i++) {
+									MediaObject foto = gallery.getFotoByOrder(i, ordenar);
+									if (foto != null) {
 										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getFilename()
 											+ "&ordenActual=" + foto.getOrden();
 										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getFilename()
@@ -94,8 +95,9 @@
 		                    	</td>
 							</tr>
 							<%
+									}
 								}
-								}
+							}
 							%>
 						</tbody>
 					</table>

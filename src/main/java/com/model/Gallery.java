@@ -58,11 +58,9 @@ public class Gallery {
     
     public MediaObject getFotoByOrder(int index, String ordenar) {
     	MediaObject mediaObject = null;
-    	if (getFotos() != null && getFotos().size() > 0) {
-    		mediaObject = getFotos().get(index);
-    	}
     	boolean found = false;
     	if (ordenar != null && ordenar.equals("no")) {
+    		mediaObject = getFotos().get(index);
     		found = true;
     	}
     	for (int i = 0; !found && getFotos() != null && i < getFotos().size(); i++) {
