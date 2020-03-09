@@ -53,8 +53,15 @@
 						<tbody>
 							<%
 							if (gallery != null && gallery.getFotos() != null) {
+								Integer orden = 1;
 								for (int i = 0; i < gallery.getFotos().size(); i++) {
-									MediaObject foto = gallery.getFotoByOrder(i, ordenar);
+									MediaObject foto = null;
+									if (ordenar != null && ordenar.equals("no")) {
+										foto = gallery.getFotos().get(i);
+									} else {
+										foto = gallery.getFotoByOrder(orden);
+										orden = foto.getOrden() + 1;
+									}
 									if (foto != null) {
 										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getFilename()
 											+ "&ordenActual=" + foto.getOrden();

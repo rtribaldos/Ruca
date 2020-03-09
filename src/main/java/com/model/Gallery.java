@@ -60,7 +60,9 @@ public class Gallery {
     	MediaObject mediaObject = null;
     	boolean found = false;
     	for (int i = 0; !found && getFotos() != null && i < getFotos().size(); i++) {
-    		if (getFotos().get(i).getOrden() == orden) {
+    		if (getFotos().get(i).getOrden() == null) {
+    			found = true;
+    		} else if (getFotos().get(i).getOrden() == orden) {
     			mediaObject = getFotos().get(i);
     			found = true;
     		}
