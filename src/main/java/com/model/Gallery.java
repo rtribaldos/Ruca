@@ -56,19 +56,18 @@ public class Gallery {
     	this.fotos.add(foto);
     }
     
-    public MediaObject getFotoByOrder(int index, String ordenar) {
+    public MediaObject getFotoByOrder(Integer orden) {
     	MediaObject mediaObject = null;
     	boolean found = false;
-    	if (ordenar != null && ordenar.equals("no")) {
-    		mediaObject = getFotos().get(index);
-    		found = true;
-    	}
     	for (int i = 0; !found && getFotos() != null && i < getFotos().size(); i++) {
-    		if (getFotos().get(i).getOrden() == index + 1) {
+    		if (getFotos().get(i).getOrden() == orden) {
     			mediaObject = getFotos().get(i);
     			found = true;
     		}
-    	}    	
+    	}
+    	if (!found) {
+    		getFotoByOrder(orden + 1);
+    	}
     	return mediaObject;    	
     }
         
