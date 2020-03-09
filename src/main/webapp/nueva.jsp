@@ -265,7 +265,7 @@
 								for(MediaObject foto: gallery.getFotos()){
 									if(foto.isPrincipal()){
 										String descripcion= foto.getDescription();
-										 if(descripcion != null){
+										 if(descripcion != null && descripcion != ""){
 											   descripcion = descripcion.replaceAll("á", "&aacute;");
 											   descripcion = descripcion.replaceAll("é", "&eacute;");
 											   descripcion = descripcion.replaceAll("í", "&iacute;");

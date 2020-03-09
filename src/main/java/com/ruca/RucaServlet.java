@@ -48,12 +48,13 @@ public class RucaServlet extends HttpServlet {
 			String subirOrden = req.getParameter("subirOrden");
 			String bajarOrden = req.getParameter("bajarOrden");
 			String ordenActual = req.getParameter("ordenActual");
+			boolean isFotoPrincipal = "true".equalsIgnoreCase(req.getParameter("principal"));
 			
 			if (gallery != null) {
 				if (borraFileName != null && !borraFileName.equals("")) {
 					borra(req, resp, gallery, borraFileName);
 				} else if (subirOrden != null && !subirOrden.equals("")) {
-					subirOrden(req, resp, gallery, subirOrden, ordenActual);
+					subirOrden(req, resp, gallery, subirOrden, ordenActual, isFotoPrincipal);
 				} else if (bajarOrden != null && !bajarOrden.equals("")) {
 					bajarOrden(req, resp, gallery, bajarOrden, ordenActual);
 				} else {
@@ -200,23 +201,12 @@ public class RucaServlet extends HttpServlet {
 		req.setAttribute("galeria", gallery);
 	}
 	
-	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String filename, 
-			String ordenActual) throws IOException {
+	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, String ordenActual, boolean isPrincipal) throws IOException {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 			Integer currentOrden = ordenActual != null ? Integer.valueOf(ordenActual) : null;
-			Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
-			if (currentOrden != null && currentOrden > 1 && gallery != null && gallery.getFotos() != null) {
-				for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
-					MediaObject foto = (MediaObject) iterator.next();
-					if (foto.getOrden().equals(currentOrden - 1)) {
-						foto.setOrden(currentOrden);
-					}					
-					if (foto.getFilename().equals(filename)) {
-						foto.setOrden(currentOrden - 1);
-					}
-				}
-			}			
+			Gallery gallery = GaleriaDAO.upOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);
+			
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);
 		}

@@ -64,9 +64,9 @@
 										orden = foto.getOrden() + 1;
 									}
 									if (foto != null) {
-										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getFilename()
+										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
 											+ "&ordenActual=" + foto.getOrden();
-										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getFilename()
+										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
 											+ "&ordenActual=" + foto.getOrden();
 										String urlBorrado="/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
 							%>
