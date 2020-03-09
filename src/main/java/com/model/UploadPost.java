@@ -30,17 +30,16 @@ public class UploadPost extends HttpServlet {
 		User user;
 		BlobKey blobKey;
 		String contentType;
-		long size;
+		Long size;
 		Date creation;
 		String fileName;
 		String op;
 		String title;
 		String description;
-		boolean bPrincipal;
+		Boolean bPrincipal;
 		UserService userService = UserServiceFactory.getUserService();
 		user = userService.getCurrentUser();
-		int orden = 1;
-
+		
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
 
 		if (blobs.keySet().isEmpty()) {
@@ -91,17 +90,18 @@ public class UploadPost extends HttpServlet {
 			LogsManager.showError(e.getMessage(), e);
 		}
 		
-		if (gallery != null && gallery.getFotos() != null) {
-			orden = gallery.getFotos().size() + 1;
+		Integer orden = 1;
+		if (gallery != null) {
+			orden = getLastOrder(gallery.getFotos());
 		}
-
+		
 		MediaObject mediaObj = new MediaObject(user, blobKey, creation, contentType, fileName, size, title, description,
-				true, gallery, bPrincipal, anterior, "", orden);
-
+				true, gallery, bPrincipal, anterior, "", orden);		
 		gallery.addPhoto(mediaObj);
+		
 		tx.commit();
 		pm.close();
-
+		
 		if (op.equals("obraNueva")) {
 			resp.sendRedirect("/upload?galeria=obraNueva");
 		} else if (op.equals("decoracion")) {
@@ -113,5 +113,22 @@ public class UploadPost extends HttpServlet {
 		} else {
 			resp.sendRedirect("/upload");
 		}
+	}
+	
+	private Integer getLastOrder(List<MediaObject> photos) {
+		Integer order = 0;
+		if (photos != null && photos.isEmpty()) {
+			order = 1;
+		} else if (photos != null && photos.size() == 1) {
+			order =  photos.get(0).getOrden() + 1;
+		} else if (photos != null && photos.size() > 1) {
+			for (MediaObject photo : photos) {
+				if (photo.getOrden() > order) {
+					order = photo.getOrden();
+				}
+			}
+			order++;
+		}		
+		return order;
 	}
 }

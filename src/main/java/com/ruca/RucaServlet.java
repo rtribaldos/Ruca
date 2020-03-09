@@ -155,7 +155,7 @@ public class RucaServlet extends HttpServlet {
 							dispatcher = req.getRequestDispatcher("/reforma.jsp");
 						} else {
 							if (tieneAntes)
-								req.setAttribute("tieneAntes", "SI");
+								req.setAttribute("tieneAntes", "yes");
 							req.setAttribute("vivienda", vivienda);
 							dispatcher = req.getRequestDispatcher("/reformado.jsp");
 						}
