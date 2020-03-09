@@ -3,7 +3,6 @@ package com.ruca;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import com.model.Gallery;
 import com.model.MediaObject;
 import com.model.PMF;
 import com.model.dao.GaleriaDAO;
+import com.model.utils.PhotoComparator;
 import com.ruca.config.LogsManager;
 
 public class RucaServlet extends HttpServlet {
@@ -93,7 +93,7 @@ public class RucaServlet extends HttpServlet {
 					}
 					galeria = GaleriaDAO.getGalleryByName(pm, gallery);
 
-					ArrayList<MediaObject> photos = new ArrayList<MediaObject>();
+					List<MediaObject> photos = new ArrayList<MediaObject>();
 
 					for (MediaObject foto : galeria.getFotos()) {
 						photos.add(foto);
@@ -107,8 +107,11 @@ public class RucaServlet extends HttpServlet {
 					}
 
 					// Ordenacion de fotos
-					photos.sort(Comparator.comparing(MediaObject::getOrden));
-
+					if (photos != null && photos.size() > 0) {
+						Collections.sort(photos, new PhotoComparator());						
+					}
+					
+					galeria.setFotos(photos);
 					req.setAttribute("galeria", galeria);
 					req.setAttribute("fotos", photos);
 					if (antes == null) {
@@ -217,7 +220,7 @@ public class RucaServlet extends HttpServlet {
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);
 		}
-		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).toString());
+		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
 	}
 	
 	public void bajarOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String filename, 
@@ -240,7 +243,7 @@ public class RucaServlet extends HttpServlet {
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);
 		}
-		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).toString());
+		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
 	}
 	
 }

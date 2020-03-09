@@ -16,6 +16,7 @@ package com.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -29,6 +30,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.model.dao.GaleriaDAO;
+import com.model.utils.PhotoComparator;
 import com.ruca.config.LogsManager;
 
 @SuppressWarnings("serial")
@@ -69,7 +71,8 @@ public class Index extends HttpServlet {
 			Gallery galeria = null;
 			try {
 				galeria = GaleriaDAO.getGalleryByName(pm, "Principal");
-				if (galeria.getFotos().size() > 0) {
+				if (galeria != null && galeria.getFotos() != null && galeria.getFotos().size() > 0) {
+					Collections.sort(galeria.getFotos(), new PhotoComparator());
 					results.addAll(galeria.getFotos());
 				}
 			} catch (Exception e) {

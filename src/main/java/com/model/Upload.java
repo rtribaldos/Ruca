@@ -1,6 +1,7 @@
 package com.model;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.model.dao.GaleriaDAO;
+import com.model.utils.PhotoComparator;
 import com.ruca.config.LogsManager;
 
 // Referenced classes of package com.model:
@@ -64,6 +66,9 @@ public class Upload extends HttpServlet {
 				Gallery principal = null;
 				try {
 					principal = GaleriaDAO.getGalleryByName(pm, "principal");
+					if (principal != null && principal.getFotos() != null && principal.getFotos().size() > 0) {
+						Collections.sort(principal.getFotos(), new PhotoComparator());
+					}
 				} catch (Exception e1) {
 					LogsManager.showError(e1.getMessage(), e1);
 				}
@@ -79,6 +84,9 @@ public class Upload extends HttpServlet {
 	public void cargaGallery(HttpServletRequest req, HttpServletResponse resp, String galeria) throws Exception {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
+		if (gallery != null && gallery.getFotos() != null && gallery.getFotos().size() > 0) {
+			Collections.sort(gallery.getFotos(), new PhotoComparator());
+		}				
 		req.setAttribute("galeria", gallery);
 	}
 }

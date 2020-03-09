@@ -7,6 +7,7 @@
 	String authURL = (String) request.getAttribute("authURL");
 	String uploadURL = (String) request.getAttribute("uploadURL");
 	Gallery gallery = (Gallery) request.getAttribute("principal");
+	String ordenar = (String) request.getParameter("ordenar");
 	int contador = 0;
 %>
 <!DOCTYPE html>
@@ -63,8 +64,9 @@
 						</thead>
 						<tbody>
 							<%
-								if (gallery != null) {
-									for (MediaObject foto : gallery.getFotos()) {
+								if (gallery != null && gallery.getFotos() != null) {
+									for (int i = 0; i < gallery.getFotos().size(); i++) {
+										MediaObject foto = gallery.getFotoByOrder(i, ordenar);
 										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getFilename()
 											+ "&ordenActual=" + foto.getOrden();
 										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getFilename()
@@ -87,9 +89,9 @@
 									</a>									
 								</td>
 								
-								<td class="a-center"><a href="<%=urlBorrado%>"><img
-										src="img/icons/user_delete.png" title="Delete user" width="16"
-										height="16" /></a></td>
+								<td class="a-center">
+		                    		<a href="<%=urlBorrado%>"><img src="img/icons/user_delete.png" title="Delete user" width="16" height="16" /></a>
+		                    	</td>
 							</tr>
 							<%
 								}
