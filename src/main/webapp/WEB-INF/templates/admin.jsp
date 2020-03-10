@@ -7,7 +7,6 @@
 	String authURL = (String) request.getAttribute("authURL");
 	String uploadURL = (String) request.getAttribute("uploadURL");
 	Gallery gallery = (Gallery) request.getAttribute("principal");
-	String ordenar = (String) request.getParameter("ordenar");
 	int contador = 0;
 %>
 <!DOCTYPE html>
@@ -58,27 +57,15 @@
 								<th><a href="#">Nombre</a></th>
 								<th><a href="#">Descripcion</a></th>
 								<th><a href="#">Foto</a></th>
-								<th><a href="#">Orden</a></th>
 								<th width="60px"><a href="#">Borrar</a></th>
 							</tr>
 						</thead>
 						<tbody>
 							<%
 							if (gallery != null && gallery.getFotos() != null) {
-								Integer orden = 1;
 								for (int i = 0; i < gallery.getFotos().size(); i++) {
-									MediaObject foto = null;
-									if (ordenar != null && ordenar.equals("no")) {
-										foto = gallery.getFotos().get(i);
-									} else {
-										foto = gallery.getFotoByOrder(orden);
-									}
+									MediaObject foto = gallery.getFotos().get(i);
 									if (foto != null) {
-										orden = foto.getOrden() + 1;
-										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
-											+ "&ordenActual=" + foto.getOrden();
-										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
-											+ "&ordenActual=" + foto.getOrden();
 										String urlBorrado = "/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
 							%>
 							<tr>
@@ -86,17 +73,6 @@
 								<td><a href="#"><%=foto.getTitle()%></a></td>
 								<td><a href="#"><%=foto.getDescription()%></a></td>
 								<td><a href="#"><%=foto.getFilename()%></a></td>
-								
-								<td class="a-center">
-									<%=foto.getOrden()%>
-									<a href="<%=urlSortUp%>">
-										<img src="img/icons/arrow_up_mini.gif" width="16" height="16" align="absmiddle" />
-									</a>
-									<a href="<%=urlSortDown%>">
-										<img src="img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" />
-									</a>									
-								</td>
-								
 								<td class="a-center">
 		                    		<a href="<%=urlBorrado%>"><img src="img/icons/user_delete.png" title="Delete user" width="16" height="16" /></a>
 		                    	</td>
@@ -111,7 +87,7 @@
 				</div>
 
 				<div id="box">
-					<h3 id="adduser">P&aacute;gina Principal</h3>
+					<h3 id="adduser">P&aacute;gina principal</h3>
 					<form id="form" action="<%=uploadURL%>" method="POST"
 						enctype="multipart/form-data">
 						<fieldset id="personal">

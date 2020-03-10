@@ -59,20 +59,20 @@ public class GaleriaDAO {
 		try {
 			gallery = getGalleryByName(pm, galeria);
 			if (orderOld > 1 && gallery != null && gallery.getFotos() != null) {
-				int ordenAnterior = (orderOld - 1);
+				int orderNew = (orderOld - 1);
 				for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
 					MediaObject foto = (MediaObject) iterator.next();
 					if (!isPrincipal) {
-						if (foto.getTitle().equals(name) && foto.getOrden().intValue() == ordenAnterior) {
+						if (foto.getTitle().equals(name) && foto.getOrden().intValue() == orderNew) {
 							foto.setOrden(-1);
 						} else if (foto.getTitle().equals(name) && foto.getOrden().intValue() == orderOld) {
-							foto.setOrden(ordenAnterior);
+							foto.setOrden(orderNew);
 						}
 					} else {
-						if (foto.getOrden().intValue() == ordenAnterior) {
+						if (foto.getOrden().intValue() == orderNew) {
 							foto.setOrden(-1);
 						} else if (foto.getOrden().intValue() == orderOld) {
-							foto.setOrden(ordenAnterior);
+							foto.setOrden(orderNew);
 						}
 					}
 					pm.makePersistent(foto);
