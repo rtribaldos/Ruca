@@ -60,9 +60,9 @@
 										foto = gallery.getFotos().get(i);
 									} else {
 										foto = gallery.getFotoByOrder(orden);
-										orden = foto.getOrden() + 1;
 									}
 									if (foto != null) {
+										orden = foto.getOrden() + 1;
 										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
 											+ "&ordenActual=" + foto.getOrden();
 										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()

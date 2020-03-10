@@ -201,12 +201,11 @@ public class RucaServlet extends HttpServlet {
 		req.setAttribute("galeria", gallery);
 	}
 	
-	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, String ordenActual, boolean isPrincipal) throws IOException {
+	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, String ordenActual, 
+			boolean isPrincipal) throws IOException {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
-			Integer currentOrden = ordenActual != null ? Integer.valueOf(ordenActual) : null;
-			Gallery gallery = GaleriaDAO.upOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);
-			
+			GaleriaDAO.upOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);			
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);
 		}

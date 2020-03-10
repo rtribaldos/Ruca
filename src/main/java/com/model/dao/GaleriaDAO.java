@@ -41,7 +41,7 @@ public class GaleriaDAO {
 			return null;
 		}
 	}
-	
+
 	public static List getGalerias(PersistenceManager pm) throws Exception {
 		String query = (new StringBuilder("select from ")).append(Gallery.class.getName())
 				.append(" where name != 'Principal'").toString();
@@ -52,70 +52,47 @@ public class GaleriaDAO {
 		Query query = pm.newQuery(Gallery.class);
 		return (List) query.execute();
 	}
-	
-	public static Gallery upOrderMediaObject(PersistenceManager pm, String galeria, String name, int orderOld, boolean isPrincipal) {
-		
-		Gallery gallery= null;
+
+	public static void upOrderMediaObject(PersistenceManager pm, String galeria, String name, int orderOld,
+			boolean isPrincipal) {
+		Gallery gallery = null;
 		try {
 			gallery = getGalleryByName(pm, galeria);
-			
 			if (orderOld > 1 && gallery != null && gallery.getFotos() != null) {
-				
 				int ordenAnterior = (orderOld - 1);
-								
-				
 				for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
-					
 					MediaObject foto = (MediaObject) iterator.next();
-					System.out.println("Title " +  foto.getTitle() + ", orden: " + foto.getOrden());
-					
-					if(!isPrincipal) {
-						
-						if(foto.getTitle().equals(name) && foto.getOrden().intValue() == ordenAnterior) {
-							foto.setOrden(-1);	
-						}else if(foto.getTitle().equals(name) && foto.getOrden().intValue() == orderOld) {
+					if (!isPrincipal) {
+						if (foto.getTitle().equals(name) && foto.getOrden().intValue() == ordenAnterior) {
+							foto.setOrden(-1);
+						} else if (foto.getTitle().equals(name) && foto.getOrden().intValue() == orderOld) {
 							foto.setOrden(ordenAnterior);
 						}
-					}else {
-						
-						if(foto.getOrden().intValue() == ordenAnterior) {
-							foto.setOrden(-1);	
-						}else if(foto.getOrden().intValue() == orderOld) {
+					} else {
+						if (foto.getOrden().intValue() == ordenAnterior) {
+							foto.setOrden(-1);
+						} else if (foto.getOrden().intValue() == orderOld) {
 							foto.setOrden(ordenAnterior);
 						}
 					}
-					
 					pm.makePersistent(foto);
-							
 				}
-					
-					
 				for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
-					
-					MediaObject foto = (MediaObject) iterator.next();				
-					
-					
-					if(!isPrincipal) {
-						if(foto.getTitle().equals(name) && foto.getOrden().intValue() == -1) {
-							   foto.setOrden(orderOld);
-						}	 
-					}else {
-						if(foto.getOrden().intValue() == -1) {
-							 foto.setOrden(orderOld);
+					MediaObject foto = (MediaObject) iterator.next();
+					if (!isPrincipal) {
+						if (foto.getTitle().equals(name) && foto.getOrden().intValue() == -1) {
+							foto.setOrden(orderOld);
+						}
+					} else {
+						if (foto.getOrden().intValue() == -1) {
+							foto.setOrden(orderOld);
 						}
 					}
-					
 					pm.makePersistent(foto);
 				}
-			
-			}	
-			
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
-		return gallery;
 	}
-	
+
 }
