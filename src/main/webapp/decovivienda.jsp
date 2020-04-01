@@ -2,6 +2,7 @@
 <%@ page import="com.model.MediaObject" %>
 <%@ page import="com.model.Gallery" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.model.dao.GaleriaDAO" %>
 <%
   User user = (User) request.getAttribute("user");
   String authURL = (String) request.getAttribute("authURL");
@@ -81,7 +82,8 @@
 							<div id="gallery">
 							<%
 							if(galeria != null){
-								for(MediaObject foto: galeria.getFotos()){ 
+								List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria);
+								for(MediaObject foto: fotos){ 
 									if(vivienda.equals(foto.getTitle())){
 										contador++; 
 							%>

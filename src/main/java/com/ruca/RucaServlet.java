@@ -18,6 +18,7 @@ import com.model.PMF;
 import com.model.dao.GaleriaDAO;
 import com.model.utils.PhotoComparator;
 import com.ruca.config.LogsManager;
+import javax.jdo.*;
 
 public class RucaServlet extends HttpServlet {
 
@@ -94,25 +95,19 @@ public class RucaServlet extends HttpServlet {
 					}
 					galeria = GaleriaDAO.getGalleryByName(pm, gallery);
 
-					List<MediaObject> photos = new ArrayList<MediaObject>();
-
-					for (MediaObject foto : galeria.getFotos()) {
-						photos.add(foto);
-						if (vivienda != null && !vivienda.equals("")) {
-							if (vivienda.equals(foto.getTitle())) {
-								if (!"".equals(foto.getTextAntes())) {
-									tieneAntes = true;
+					List<MediaObject> photos = GaleriaDAO.getFotosOrdenadas(galeria);
+					if (photos != null && photos.size() > 0) {
+						for (MediaObject foto : photos) {
+							if (vivienda != null && !vivienda.equals("")) {
+								if (vivienda.equals(foto.getTitle())) {
+									if (!"".equals(foto.getTextAntes())) {
+										tieneAntes = true;
+									}
 								}
 							}
-						}
-					}
-
-					// Ordenacion de fotos
-					if (photos != null && photos.size() > 0) {
-						Collections.sort(photos, new PhotoComparator());						
+						}								
 					}
 					
-					galeria.setFotos(photos);
 					req.setAttribute("galeria", galeria);
 					req.setAttribute("fotos", photos);
 					if (antes == null) {
@@ -205,9 +200,14 @@ public class RucaServlet extends HttpServlet {
 			boolean isPrincipal) throws IOException {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
-			GaleriaDAO.upOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);			
+			Transaction tx = pm.currentTransaction();
+			tx.begin();
+			GaleriaDAO.upOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);
+			tx.commit();
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);
+		}finally {
+			pm.close();
 		}
 		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
 	}

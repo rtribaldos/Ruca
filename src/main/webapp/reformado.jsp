@@ -1,6 +1,7 @@
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.model.MediaObject" %>
 <%@ page import="com.model.Gallery" %>
+<%@ page import="com.model.dao.GaleriaDAO" %>
 <%@ page import="java.util.List" %>
 <%
   User user = (User) request.getAttribute("user");
@@ -110,7 +111,8 @@
 							<div id="gallery">
 							<%
 							if(galeria != null){
-								for(MediaObject foto: galeria.getFotos()){ 
+								List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria);
+								for(MediaObject foto: fotos){ 
 									if(vivienda.equals(foto.getTitle())){
 										contador++; 
 										if((!"".equals(foto.getTextAntes()) && !"".equals(antes))

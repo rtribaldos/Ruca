@@ -3,6 +3,7 @@ package com.model.dao;
 import com.model.Gallery;
 import com.model.MediaObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.jdo.PersistenceManager;
@@ -41,6 +42,21 @@ public class GaleriaDAO {
 			return null;
 		}
 	}
+	
+	public static ArrayList getFotosOrdenadas(Gallery galeria) {
+		ArrayList<MediaObject> fotos = new ArrayList<>();
+		Integer orden = 1;
+		while(fotos.size() < galeria.getFotos().size()) {
+			for(MediaObject foto : galeria.getFotos()) {
+				if(foto.getOrden() == orden) {
+					fotos.add(foto);
+					++orden;
+				}
+			}
+		}
+		
+		return fotos;
+	}
 
 	public static List getGalerias(PersistenceManager pm) throws Exception {
 		String query = (new StringBuilder("select from ")).append(Gallery.class.getName())
@@ -58,10 +74,12 @@ public class GaleriaDAO {
 		Gallery gallery = null;
 		try {
 			gallery = getGalleryByName(pm, galeria);
-			if (orderOld > 1 && gallery != null && gallery.getFotos() != null) {
+			List<MediaObject> photos = gallery.getFotos();		
+						
+			if (orderOld > 1 && gallery != null && photos != null) {
 				int orderNew = (orderOld - 1);
-				for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
-					MediaObject foto = (MediaObject) iterator.next();
+				for (Iterator<MediaObject> iterator = photos.iterator(); iterator.hasNext();) {
+					MediaObject foto = ((MediaObject) iterator.next()); 
 					if (!isPrincipal) {
 						if (foto.getTitle().equals(name) && foto.getOrden().intValue() == orderNew) {
 							foto.setOrden(-1);
@@ -75,9 +93,9 @@ public class GaleriaDAO {
 							foto.setOrden(orderNew);
 						}
 					}
-					pm.makePersistent(foto);
+					
 				}
-				for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
+				for (Iterator<MediaObject> iterator = photos.iterator(); iterator.hasNext();) {
 					MediaObject foto = (MediaObject) iterator.next();
 					if (!isPrincipal) {
 						if (foto.getTitle().equals(name) && foto.getOrden().intValue() == -1) {
@@ -88,8 +106,8 @@ public class GaleriaDAO {
 							foto.setOrden(orderOld);
 						}
 					}
-					pm.makePersistent(foto);
 				}
+				
 			}
 		} catch (Exception e) {
 		}
