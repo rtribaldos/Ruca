@@ -10,6 +10,7 @@
   String vivienda = (String) request.getAttribute("vivienda");
   String nomVivienda = (String) request.getAttribute("desc");
   Gallery galeria = (Gallery) request.getAttribute("galeria");
+  List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria);
   int contador=0;
 %>
 
@@ -81,8 +82,7 @@
 							
 							<div id="gallery">
 							<%
-							if(galeria != null){
-								List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria);
+							if(galeria != null){								
 								for(MediaObject foto: fotos){ 
 									if(vivienda.equals(foto.getTitle())){
 										contador++; 

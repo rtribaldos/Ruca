@@ -2,11 +2,13 @@
 <%@ page import="com.model.MediaObject" %>
 <%@ page import="com.model.Gallery" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.model.dao.GaleriaDAO" %>
 <%
   User user = (User) request.getAttribute("user");
   String authURL = (String) request.getAttribute("authURL");
   String uploadURL = (String) request.getAttribute("uploadURL");
   Gallery galeria = (Gallery) request.getAttribute("galeria");
+  List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria);
   int contador=0;
 %>
 
@@ -259,10 +261,9 @@
 					<div id="content">
 						<div class="grid_12b">
 							<p><h5><b>PROYECTOS > OFICINAS</b></h5></p> <BR>
-							<!--Circle-->
-								<%
+							<%
 							if(galeria != null){
-								for(MediaObject foto: galeria.getFotos()){
+								for(MediaObject foto: fotos){
 									if(foto.isPrincipal()){
 										String urlName="/?galeria=oficinas&nombre=" + foto.getTitle()+"&desc="+foto.getDescription() ;
 										contador++; 
@@ -271,8 +272,7 @@
 											<p><a  href="<%=urlName%>"  title="<%=foto.getDescription()%>">
 											<img src="<%=foto.getURLPath()%>" alt="<%=foto.getTitle()%>" style="display: block; height: 200px; margin:0px; padding:0px; border: 1px solid white"/></a></p>
 											<br><center><%=foto.getDescription()%></center>
-									</div>			
-								
+									</div>									
 							
 							<%
 									}

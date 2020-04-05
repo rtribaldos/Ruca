@@ -94,7 +94,6 @@ public class RucaServlet extends HttpServlet {
 						GaleriaDAO.createGallery(pm, "oficinas");
 					}
 					galeria = GaleriaDAO.getGalleryByName(pm, gallery);
-
 					List<MediaObject> photos = GaleriaDAO.getFotosOrdenadas(galeria);
 					if (photos != null && photos.size() > 0) {
 						for (MediaObject foto : photos) {
@@ -109,7 +108,7 @@ public class RucaServlet extends HttpServlet {
 					}
 					
 					req.setAttribute("galeria", galeria);
-					req.setAttribute("fotos", photos);
+				//	req.setAttribute("fotos", photos);
 					if (antes == null) {
 						antes = "";
 					}
