@@ -1,6 +1,9 @@
 package com.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -9,12 +12,14 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.model.utils.PhotoComparator;
+
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Gallery {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long id;
+	private Long id; 
 
 	@Persistent
 	private String name;
@@ -73,4 +78,22 @@ public class Gallery {
 		return mediaObject;
 	}
 
+	
+	public List<MediaObject> getPrincipales() {
+		
+		List<MediaObject> photos = new ArrayList<>();
+		
+		//fotos.stream().filter(foto -> foto.isPrincipal().booleanValue()).forEach(System.out::println);
+		
+		for(MediaObject foto : this.fotos) {
+			if(foto.isPrincipal()) {
+				photos.add(foto);
+			}
+		}
+		Collections.sort(photos, new PhotoComparator());
+		
+		
+		return photos;
+	
+	}
 }

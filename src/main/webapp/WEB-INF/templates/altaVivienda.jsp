@@ -51,18 +51,18 @@
 						</thead>
 						<tbody>
 							<%
-							List<MediaObject> photosPrincipales = gallery.getPrincipales();
-							if (gallery != null && photosPrincipales != null) {
+							if (gallery != null && gallery.getPrincipales() != null) {
 								Integer orden = 1;
-								for (int i = 0; i < photosPrincipales.size(); i++) {
-									MediaObject	foto = photosPrincipales.get(i);
+								for (int i = 0; i < gallery.getPrincipales().size(); i++) {
+									MediaObject	foto = gallery.getPrincipales().get(i);
 									if (foto != null) {
 										orden = foto.getOrden() + 1;
 										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
-											+ "&ordenActual=" + foto.getOrden() + "&principal=true";
+											+ "&ordenActual=" + foto.getOrden() + "&principal=y";
 										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
-											+ "&ordenActual=" + foto.getOrden() + "&principal=true";
+											+ "&ordenActual=" + foto.getOrden() + "&principal=y";
 										String urlBorrado="/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
+										
 										
 							%>
 							<tr>

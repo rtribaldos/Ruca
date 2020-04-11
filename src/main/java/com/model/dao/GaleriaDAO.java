@@ -6,6 +6,8 @@ import com.model.MediaObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -58,6 +60,8 @@ public class GaleriaDAO {
 		return fotos;
 	}
 
+		
+	
 	public static List getGalerias(PersistenceManager pm) throws Exception {
 		String query = (new StringBuilder("select from ")).append(Gallery.class.getName())
 				.append(" where name != 'Principal'").toString();
@@ -74,7 +78,13 @@ public class GaleriaDAO {
 		Gallery gallery = null;
 		try {
 			gallery = getGalleryByName(pm, galeria);
-			List<MediaObject> photos = gallery.getFotos();		
+			List<MediaObject> photos;
+			if(isPrincipal) {
+				photos = gallery.getPrincipales();
+			}else {
+				photos = gallery.getFotos();
+			}
+								
 						
 			if (orderOld > 1 && gallery != null && photos != null) {
 				int orderNew = (orderOld - 1);

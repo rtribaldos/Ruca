@@ -135,6 +135,4 @@
 
 </script>	
 </body>
-
-<!-- Mirrored from static.livedemo00.template-help.com/wt_38557/index.html by HTTrack Website Copier/3.x [XR&CO'2010], Mon, 09 Apr 2012 19:51:29 GMT -->
 </html>

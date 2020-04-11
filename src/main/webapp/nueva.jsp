@@ -281,8 +281,7 @@
 										<img src="<%=foto.getURLPath() %>"  style="display: block; height: 200px; margin:0px; padding:0px; border: 1px solid white"/>
 										<br><center><%=foto.getDescription()%></center>
 								</div></a>	
-								
-							
+															
 							<%
 									}
 								}

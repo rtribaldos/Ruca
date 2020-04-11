@@ -1,12 +1,11 @@
 package com.ruca;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Transaction;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +15,7 @@ import com.model.Gallery;
 import com.model.MediaObject;
 import com.model.PMF;
 import com.model.dao.GaleriaDAO;
-import com.model.utils.PhotoComparator;
 import com.ruca.config.LogsManager;
-import javax.jdo.*;
 
 public class RucaServlet extends HttpServlet {
 
@@ -49,7 +46,8 @@ public class RucaServlet extends HttpServlet {
 			String subirOrden = req.getParameter("subirOrden");
 			String bajarOrden = req.getParameter("bajarOrden");
 			String ordenActual = req.getParameter("ordenActual");
-			boolean isFotoPrincipal = "true".equalsIgnoreCase(req.getParameter("principal"));
+			boolean isFotoPrincipal = "true".equalsIgnoreCase(req.getParameter("principal")) || 
+					"y".equalsIgnoreCase(req.getParameter("principal"));
 			
 			if (gallery != null) {
 				if (borraFileName != null && !borraFileName.equals("")) {
@@ -57,7 +55,7 @@ public class RucaServlet extends HttpServlet {
 				} else if (subirOrden != null && !subirOrden.equals("")) {
 					subirOrden(req, resp, gallery, subirOrden, ordenActual, isFotoPrincipal);
 				} else if (bajarOrden != null && !bajarOrden.equals("")) {
-					bajarOrden(req, resp, gallery, bajarOrden, ordenActual);
+					bajarOrden(req, resp, gallery, bajarOrden, ordenActual, isFotoPrincipal);
 				} else {
 					//GaleriaDAO galleryDao = new GaleriaDAO();
 					PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -212,7 +210,7 @@ public class RucaServlet extends HttpServlet {
 	}
 	
 	public void bajarOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String filename, 
-			String ordenActual) throws IOException {
+			String ordenActual, boolean isPrincipal) throws IOException {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 			Integer currentOrden = ordenActual != null ? Integer.valueOf(ordenActual) : null;
