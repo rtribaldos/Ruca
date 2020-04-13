@@ -27,7 +27,7 @@ public class RucaServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try {
-			String borraFileName = req.getParameter("borrar");
+			
 			String gallery = req.getParameter("galeria");
 			if (gallery == null || gallery.equals("")) {
 				gallery = "principal";
@@ -43,22 +43,11 @@ public class RucaServlet extends HttpServlet {
 			RequestDispatcher dispatcher = null;
 			boolean tieneAntes = false;
 			
-			String subirOrden = req.getParameter("subirOrden");
-			String bajarOrden = req.getParameter("bajarOrden");
-			String ordenActual = req.getParameter("ordenActual");
-						
-			boolean isFotoPrincipal = "true".equalsIgnoreCase(req.getParameter("principal")) || 
-					"y".equalsIgnoreCase(req.getParameter("principal"));
+			
 			
 			if (gallery != null) {
 								
-				if (borraFileName != null && !borraFileName.equals("")) {
-					borra(req, resp, gallery, borraFileName);
-				} else if (subirOrden != null && !subirOrden.equals("")) {
-					subirOrden(req, resp, gallery, subirOrden, ordenActual, isFotoPrincipal);
-				} else if (bajarOrden != null && !bajarOrden.equals("")) {
-					bajarOrden(req, resp, gallery, bajarOrden, ordenActual, isFotoPrincipal);
-				} else {
+				
 					//GaleriaDAO galleryDao = new GaleriaDAO();
 					PersistenceManager pm = PMF.get().getPersistenceManager();
 					Gallery galeria = null;
@@ -156,7 +145,7 @@ public class RucaServlet extends HttpServlet {
 						}
 					}
 					dispatcher.forward(req, resp);
-				}
+				
 						
 				
 			}
@@ -165,27 +154,7 @@ public class RucaServlet extends HttpServlet {
 		}
 	}
 
-	public void borra(HttpServletRequest req, HttpServletResponse resp, String galeria, String filename)
-			throws IOException {
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		try {
-			Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
-			MediaObject fotoBorrar = null;
-			for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
-				MediaObject foto = (MediaObject) iterator.next();
-				if (foto.getFilename().equals(filename)) {
-					fotoBorrar = foto;
-				}
-			}
-
-			if (fotoBorrar != null) {
-				gallery.getFotos().remove(fotoBorrar);
-			}
-		} catch (Exception e) {
-			LogsManager.showError(e.getMessage(), e);
-		}
-		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).toString());
-	}
+	
 
 	public void cargaGallery(HttpServletRequest req, HttpServletResponse resp, String galeria) throws Exception {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -201,37 +170,6 @@ public class RucaServlet extends HttpServlet {
 	
 	
 	
-	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, String ordenActual, 
-			boolean isPrincipal) throws IOException {
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		try {
-			Transaction tx = pm.currentTransaction();
-			tx.begin();
-			GaleriaDAO.upOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);
-			tx.commit();
-		} catch (Exception e) {
-			LogsManager.showError(e.getMessage(), e);
-		}finally {
-			pm.close();
-		}
-		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
-	}
 	
-	public void bajarOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, 
-			String ordenActual, boolean isPrincipal) throws IOException {
-		
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		try {
-			Transaction tx = pm.currentTransaction();
-			tx.begin();
-			GaleriaDAO.downOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);
-			tx.commit();
-		} catch (Exception e) {
-			LogsManager.showError(e.getMessage(), e);
-		}finally {
-			pm.close();
-		}
-		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
-	}
 	
 }

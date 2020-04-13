@@ -58,12 +58,12 @@
 									MediaObject	foto = photosPrincipales.get(i);
 									if (foto != null) {
 										orden = foto.getOrden() + 1;
-										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
+										String urlSortUp = "/upload?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
 											+ "&ordenActual=" + foto.getOrden() + "&principal=true";
-										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
+										String urlSortDown = "/upload?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
 											+ "&ordenActual=" + foto.getOrden() + "&principal=true";
-										String urlBorrado="/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
-										String urlDetalle="/Ruca?galeria=" + gallery.getName() + "&detalle=" + foto.getTitle();
+										String urlBorrado="/upload?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
+										String urlDetalle="/upload?galeria=" + gallery.getName() + "&detalle=" + foto.getTitle();
 										
 							%>
 							<tr>

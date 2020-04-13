@@ -7,7 +7,9 @@
   String authURL = (String) request.getAttribute("authURL");
   String uploadURL = (String) request.getAttribute("uploadURL");
   Gallery gallery = (Gallery) request.getAttribute("galeria");
+  String vivienda = (String) request.getAttribute("vivienda");
   String ordenar = (String) request.getAttribute("ordenar");
+  List<MediaObject> fotos = (List<MediaObject>) request.getAttribute("fotos");
   int contador=0;
 %>
 <!DOCTYPE html>
@@ -21,7 +23,7 @@
 <body>
 <div id="container">
     	<div id="header">
-        	<h2>Administraci&oacute;n Ruca Interiores <br><BR> <%=gallery.getName().toUpperCase()%></h2>
+        	<h2>Administraci&oacute;n Ruca Interiores <br><BR> <%=vivienda%></h2>
    
         <div id="wrapper">
            <br><br><br><br>
@@ -37,7 +39,7 @@
          </div> 
          <div id="content">
           	<div id="box">
-                	<h3><%=gallery.getName().toUpperCase()%></h3>
+                	<h3><%=vivienda.toUpperCase()%></h3>
                 	<table width="100%">
 						<thead>
 							<tr>
@@ -51,17 +53,17 @@
 						</thead>
 						<tbody>
 							<%
-							if (gallery != null && gallery.getPrincipales() != null) {
-								Integer orden = 1;
-								for (int i = 0; i < gallery.getPrincipales().size(); i++) {
-									MediaObject	foto = gallery.getPrincipales().get(i);
+							if (gallery != null && fotos != null) {
+							//	Integer orden = 1;
+								for (int i = 0; i < fotos.size(); i++) {
+									MediaObject	foto = fotos.get(i);
 									if (foto != null) {
-										orden = foto.getOrden() + 1;
-										String urlSortUp = "/Ruca?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
-											+ "&ordenActual=" + foto.getOrden() + "&principal=y";
-										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
-											+ "&ordenActual=" + foto.getOrden() + "&principal=y";
-										String urlBorrado="/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
+									//	orden = foto.getOrden() + 1;
+										String urlSortUp = "/upload?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
+											+ "&ordenActual=" + foto.getOrden() + "&principal=n";
+										String urlSortDown = "/upload?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
+											+ "&ordenActual=" + foto.getOrden() + "&principal=n";
+										String urlBorrado="/upload?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
 										
 										
 							%>
@@ -99,14 +101,14 @@
                 	<h3 id="adduser"></h3>
                     <form id="form" action="<%= uploadURL%>" method="POST" enctype="multipart/form-data">
                       <fieldset id="personal">
-                        <legend> * Nueva</legend>
+                        <legend> * Subir Foto Nueva</legend>
                         <label for="lastname">Nombre: </label> 
                         <input name="title" id="title" type="text" tabindex="1" size="30" />
                         <br />
                         <label for="firstname">Descripci&oacute;n: </label>
                         <input name="description" id="description" type="text" tabindex="2" size="60"/>
                         <br />
-                        <label for="email">Foto Principal: </label>
+                        <label for="email">Foto: </label>
                         <input type="file" name="file">
                         <br />
                         <input type="hidden" name="principal" id="yes" value="yes" />

@@ -2,8 +2,10 @@ package com.ruca;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Iterator;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Transaction;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,13 +18,12 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.model.Gallery;
+import com.model.MediaObject;
 import com.model.PMF;
 import com.model.dao.GaleriaDAO;
 import com.model.utils.PhotoComparator;
 import com.ruca.config.LogsManager;
 
-// Referenced classes of package com.model:
-//            PMF, Gallery
 
 public class Upload extends HttpServlet {
 
@@ -38,43 +39,56 @@ public class Upload extends HttpServlet {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		RequestDispatcher dispatcher = null;
-		if (user.getEmail().equalsIgnoreCase("raultribaldos@gmail.com")
-				|| user.getEmail().equalsIgnoreCase("gracialafamilia@gmail.com")
+		
+		String borraFileName = req.getParameter("borrar");
+		String subirOrden = req.getParameter("subirOrden");
+		String bajarOrden = req.getParameter("bajarOrden");
+		String ordenActual = req.getParameter("ordenActual");
+					
+		boolean isFotoPrincipal = "true".equalsIgnoreCase(req.getParameter("principal")) || 
+				"y".equalsIgnoreCase(req.getParameter("principal"));
+		
+		
+		if (user.getEmail().equalsIgnoreCase("raultribaldos@gmail.com")	|| user.getEmail().equalsIgnoreCase("gracialafamilia@gmail.com")
 				|| user.getEmail().equalsIgnoreCase("alexei_lescaylle@yahoo.es")) {
+			
+			///Carga urls upload
 			String authURL = userService.createLogoutURL("/");
 			String uploadURL = blobstoreService.createUploadUrl("/post");
 			req.setAttribute("uploadURL", uploadURL);
 			req.setAttribute("authURL", authURL);
 			req.setAttribute("user", user);
+			//
+			
 			String gallery = req.getParameter("galeria");
+			String viviendaDetalle = req.getParameter("detalle");	
+			
 			if (gallery != null) {
+				
 				try {
-					String viviendaDetalle = req.getParameter("detalle");
 					
+									
+					if (borraFileName != null && !borraFileName.equals("")) {
+						borra(req, resp, gallery, borraFileName);
+					} else if (subirOrden != null && !subirOrden.equals("")) {
+						subirOrden(req, resp, gallery, subirOrden, ordenActual, isFotoPrincipal);
+					} else if (bajarOrden != null && !bajarOrden.equals("")) {
+						bajarOrden(req, resp, gallery, bajarOrden, ordenActual, isFotoPrincipal);
+					} 
+										
 					if(viviendaDetalle != null && !"".equalsIgnoreCase(viviendaDetalle)) {
 						
 						cargaDetalle(req, resp, gallery, viviendaDetalle);
 						req.setAttribute("vivienda", viviendaDetalle);
-						req.getRequestDispatcher("/detalle.jsp").forward(req, resp);
+						dispatcher = req.getRequestDispatcher("WEB-INF/templates/detalle.jsp");
 						
 					}else {
 						
 						cargaGallery(req, resp, gallery);
 						dispatcher = req.getRequestDispatcher("WEB-INF/templates/viviendas.jsp");
 						
-						/*if (gallery.equals("obraNueva")) {
-							dispatcher = req.getRequestDispatcher("WEB-INF/templates/obraNueva.jsp");
-						} else if (gallery.equals("oficinas")) {
-							dispatcher = req.getRequestDispatcher("WEB-INF/templates/office.jsp");
-						} else if (gallery.equals("reformas")) {
-							dispatcher = req.getRequestDispatcher("WEB-INF/templates/ref.jsp");
-						} else {
-							dispatcher = req.getRequestDispatcher("WEB-INF/templates/deco.jsp");
-						}*/
-						
 					}
-					
-					
+										
 				} catch (Exception e) {
 					LogsManager.showError(e.getMessage(), e);
 				}
@@ -114,6 +128,62 @@ public class Upload extends HttpServlet {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
 		req.setAttribute("fotos", GaleriaDAO.getFotosOrdenadas(gallery));
+	}
+	
+	
+	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, String ordenActual, 
+			boolean isPrincipal) throws IOException {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			Transaction tx = pm.currentTransaction();
+			tx.begin();
+			GaleriaDAO.upOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);
+			tx.commit();
+		} catch (Exception e) {
+			LogsManager.showError(e.getMessage(), e);
+		}finally {
+			pm.close();
+		}
+		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
+	}
+	
+	public void bajarOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, 
+			String ordenActual, boolean isPrincipal) throws IOException {
+		
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			Transaction tx = pm.currentTransaction();
+			tx.begin();
+			GaleriaDAO.downOrderMediaObject(pm, galeria, title, Integer.parseInt(ordenActual), isPrincipal);
+			tx.commit();
+		} catch (Exception e) {
+			LogsManager.showError(e.getMessage(), e);
+		}finally {
+			pm.close();
+		}
+		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
+	}
+	
+	public void borra(HttpServletRequest req, HttpServletResponse resp, String galeria, String filename)
+			throws IOException {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
+			MediaObject fotoBorrar = null;
+			for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
+				MediaObject foto = (MediaObject) iterator.next();
+				if (foto.getFilename().equals(filename)) {
+					fotoBorrar = foto;
+				}
+			}
+
+			if (fotoBorrar != null) {
+				gallery.getFotos().remove(fotoBorrar);
+			}
+		} catch (Exception e) {
+			LogsManager.showError(e.getMessage(), e);
+		}
+		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).toString());
 	}
 	
 }
