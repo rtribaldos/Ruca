@@ -47,15 +47,16 @@ public class GaleriaDAO {
 	public static ArrayList getFotosOrdenadas(Gallery galeria) {
 		ArrayList<MediaObject> fotos = new ArrayList<>();
 		Integer orden = 1;
-		while(fotos.size() < galeria.getFotos().size()) {
-			for(MediaObject foto : galeria.getFotos()) {
-				if(foto.getOrden() == orden) {
-					fotos.add(foto);
-					++orden;
+		if(galeria != null && galeria.getFotos().size() > 0) {
+			while(fotos.size() < galeria.getFotos().size()) {
+				for(MediaObject foto : galeria.getFotos()) {
+					if(foto.getOrden() == orden) {
+						fotos.add(foto);
+						++orden;
+					}
 				}
 			}
 		}
-		
 		return fotos;
 	}
 

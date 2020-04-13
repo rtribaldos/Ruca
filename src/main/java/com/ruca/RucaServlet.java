@@ -46,10 +46,12 @@ public class RucaServlet extends HttpServlet {
 			String subirOrden = req.getParameter("subirOrden");
 			String bajarOrden = req.getParameter("bajarOrden");
 			String ordenActual = req.getParameter("ordenActual");
+						
 			boolean isFotoPrincipal = "true".equalsIgnoreCase(req.getParameter("principal")) || 
 					"y".equalsIgnoreCase(req.getParameter("principal"));
 			
 			if (gallery != null) {
+								
 				if (borraFileName != null && !borraFileName.equals("")) {
 					borra(req, resp, gallery, borraFileName);
 				} else if (subirOrden != null && !subirOrden.equals("")) {
@@ -75,7 +77,7 @@ public class RucaServlet extends HttpServlet {
 							encOficinas = true;
 						}
 					}
-
+	
 					if (!encPrincipal) {
 						GaleriaDAO.createGallery(pm, "principal");
 					}
@@ -111,7 +113,7 @@ public class RucaServlet extends HttpServlet {
 						antes = "";
 					}
 					req.setAttribute("antes", antes);
-
+	
 					if (descripcion != null) {
 						descripcion = descripcion.replaceAll("\303\241", "&aacute;");
 						descripcion = descripcion.replaceAll("\303\251", "&eacute;");
@@ -155,6 +157,8 @@ public class RucaServlet extends HttpServlet {
 					}
 					dispatcher.forward(req, resp);
 				}
+						
+				
 			}
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);
@@ -192,6 +196,10 @@ public class RucaServlet extends HttpServlet {
 		}
 		req.setAttribute("galeria", gallery);
 	}
+	
+	
+	
+	
 	
 	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, String ordenActual, 
 			boolean isPrincipal) throws IOException {

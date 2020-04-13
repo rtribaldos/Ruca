@@ -1,7 +1,10 @@
-package com.model;
+package com.ruca;
 
 import com.google.appengine.api.blobstore.*;
 import com.google.appengine.api.users.*;
+import com.model.Gallery;
+import com.model.MediaObject;
+import com.model.PMF;
 import com.model.dao.GaleriaDAO;
 import com.ruca.config.LogsManager;
 
@@ -10,9 +13,6 @@ import java.net.URLEncoder;
 import java.util.*;
 import javax.jdo.*;
 import javax.servlet.http.*;
-
-// Referenced classes of package com.model:
-//            PMF, MediaObject, Gallery
 
 public class UploadPost extends HttpServlet {
 

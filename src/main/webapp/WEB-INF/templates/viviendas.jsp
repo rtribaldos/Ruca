@@ -41,18 +41,18 @@
                 	<table width="100%">
 						<thead>
 							<tr>
-                            	<th width="40px"><a href="#">ID<img src="img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" /></a></th>
+                            	<th width="40px"><a href="#">Orden<img src="img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" /></a></th>
                             	<th><a href="#">Nombre</a></th>
                             	<th><a href="#">Descripci&oacute;n</a></th>
                             	<th><a href="#">Foto principal</a></th>
-								<th><a href="#">Orden</a></th>
+								<th><a href="#">Subir / Bajar</a></th>
 								<th width="60px"><a href="#">Borrar</a></th>
                             </tr>
 						</thead>
 						<tbody>
 							<%
 							List<MediaObject> photosPrincipales = gallery.getPrincipales();
-							if (gallery != null && photosPrincipales != null) {
+							if (gallery != null && photosPrincipales != null && photosPrincipales.size() > 0) {
 								Integer orden = 1;
 								for (int i = 0; i < photosPrincipales.size(); i++) {
 									MediaObject	foto = photosPrincipales.get(i);
@@ -63,16 +63,16 @@
 										String urlSortDown = "/Ruca?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
 											+ "&ordenActual=" + foto.getOrden() + "&principal=true";
 										String urlBorrado="/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
+										String urlDetalle="/Ruca?galeria=" + gallery.getName() + "&detalle=" + foto.getTitle();
 										
 							%>
 							<tr>
                             	<td class="a-center"><%=++contador%></td>
-                            	<td><a href="#"><%=foto.getTitle() %></a></td>
-                            	<td><a href="#"><%=foto.getDescription() %></a></td>
+                            	<td><a href="<%=urlDetalle%>"><%=foto.getTitle() %></a></td>
+                            	<td><a href="<%=urlDetalle%>"><%=foto.getDescription() %></a></td>
                             	<td><a href="#"><%=foto.getFilename()%></a></td>
                             	
                             	<td class="a-center">
-									<%=foto.getOrden()%>
 									<a href="<%=urlSortUp%>">
 										<img src="img/icons/arrow_up_mini.gif" width="16" height="16" align="absmiddle" />
 									</a>

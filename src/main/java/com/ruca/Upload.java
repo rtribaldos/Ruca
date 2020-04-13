@@ -1,4 +1,4 @@
-package com.model;
+package com.ruca;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -15,6 +15,8 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.model.Gallery;
+import com.model.PMF;
 import com.model.dao.GaleriaDAO;
 import com.model.utils.PhotoComparator;
 import com.ruca.config.LogsManager;
@@ -45,23 +47,39 @@ public class Upload extends HttpServlet {
 			req.setAttribute("authURL", authURL);
 			req.setAttribute("user", user);
 			String gallery = req.getParameter("galeria");
-			if (gallery != null && (gallery.equals("obraNueva") || gallery.equals("decoracion")
-					|| gallery.equals("oficinas") || gallery.equals("reformas"))) {
+			if (gallery != null) {
 				try {
-					cargaGallery(req, resp, gallery);
-					if (gallery.equals("obraNueva")) {
-						dispatcher = req.getRequestDispatcher("WEB-INF/templates/obraNueva.jsp");
-					} else if (gallery.equals("oficinas")) {
-						dispatcher = req.getRequestDispatcher("WEB-INF/templates/office.jsp");
-					} else if (gallery.equals("reformas")) {
-						dispatcher = req.getRequestDispatcher("WEB-INF/templates/ref.jsp");
-					} else {
-						dispatcher = req.getRequestDispatcher("WEB-INF/templates/deco.jsp");
+					String viviendaDetalle = req.getParameter("detalle");
+					
+					if(viviendaDetalle != null && !"".equalsIgnoreCase(viviendaDetalle)) {
+						
+						cargaDetalle(req, resp, gallery, viviendaDetalle);
+						req.setAttribute("vivienda", viviendaDetalle);
+						req.getRequestDispatcher("/detalle.jsp").forward(req, resp);
+						
+					}else {
+						
+						cargaGallery(req, resp, gallery);
+						dispatcher = req.getRequestDispatcher("WEB-INF/templates/viviendas.jsp");
+						
+						/*if (gallery.equals("obraNueva")) {
+							dispatcher = req.getRequestDispatcher("WEB-INF/templates/obraNueva.jsp");
+						} else if (gallery.equals("oficinas")) {
+							dispatcher = req.getRequestDispatcher("WEB-INF/templates/office.jsp");
+						} else if (gallery.equals("reformas")) {
+							dispatcher = req.getRequestDispatcher("WEB-INF/templates/ref.jsp");
+						} else {
+							dispatcher = req.getRequestDispatcher("WEB-INF/templates/deco.jsp");
+						}*/
+						
 					}
+					
+					
 				} catch (Exception e) {
 					LogsManager.showError(e.getMessage(), e);
 				}
 			} else {
+				
 				PersistenceManager pm = PMF.get().getPersistenceManager();
 				Gallery principal = null;
 				try {
@@ -89,4 +107,13 @@ public class Upload extends HttpServlet {
 		}				
 		req.setAttribute("galeria", gallery);
 	}
+	
+	
+	public void cargaDetalle(HttpServletRequest req, HttpServletResponse resp, String galeria, String title) {
+		
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
+		req.setAttribute("fotos", GaleriaDAO.getFotosOrdenadas(gallery));
+	}
+	
 }

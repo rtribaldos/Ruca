@@ -23,12 +23,12 @@
 
 	<servlet>
 		<servlet-name>upload</servlet-name>
-		<servlet-class>com.model.Upload</servlet-class>
+		<servlet-class>com.ruca.Upload</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>post</servlet-name>
-		<servlet-class>com.model.UploadPost</servlet-class>
+		<servlet-class>com.ruca.UploadPost</servlet-class>
 	</servlet>
 
 	<servlet>
