@@ -60,7 +60,6 @@ public class GaleriaDAO {
 		return fotos;
 	}
 
-		
 	
 	public static List getGalerias(PersistenceManager pm) throws Exception {
 		String query = (new StringBuilder("select from ")).append(Gallery.class.getName())

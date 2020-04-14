@@ -102,8 +102,7 @@
                     <form id="form" action="<%= uploadURL%>" method="POST" enctype="multipart/form-data">
                       <fieldset id="personal">
                         <legend> * Subir Foto Nueva</legend>
-                        <label for="lastname">Nombre: </label> 
-                        <input name="title" id="title" type="text" tabindex="1" size="30" />
+                        <input type="hidden" name="title" id="title" type="text" value="<%=vivienda%>" />
                         <br />
                         <label for="firstname">Descripci&oacute;n: </label>
                         <input name="description" id="description" type="text" tabindex="2" size="60"/>
@@ -111,7 +110,7 @@
                         <label for="email">Foto: </label>
                         <input type="file" name="file">
                         <br />
-                        <input type="hidden" name="principal" id="yes" value="yes" />
+                        <input type="hidden" name="principal" id="no" value="no" />
                         <input type="hidden" name="op" value="decoracion" />
                      </fieldset>
                      

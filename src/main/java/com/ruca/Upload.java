@@ -3,6 +3,7 @@ package com.ruca;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Transaction;
@@ -52,39 +53,50 @@ public class Upload extends HttpServlet {
 		if (user.getEmail().equalsIgnoreCase("raultribaldos@gmail.com")	|| user.getEmail().equalsIgnoreCase("gracialafamilia@gmail.com")
 				|| user.getEmail().equalsIgnoreCase("alexei_lescaylle@yahoo.es")) {
 			
+			
+			String galeria = req.getParameter("galeria");
+			String viviendaDetalle = req.getParameter("detalle"); 
+			
 			///Carga urls upload
 			String authURL = userService.createLogoutURL("/");
 			String uploadURL = blobstoreService.createUploadUrl("/post");
 			req.setAttribute("uploadURL", uploadURL);
 			req.setAttribute("authURL", authURL);
 			req.setAttribute("user", user);
-			//
+			req.setAttribute("user", user);
 			
-			String gallery = req.getParameter("galeria");
-			String viviendaDetalle = req.getParameter("detalle");	
+			//
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
+			req.setAttribute("galeria", gallery);
 			
 			if (gallery != null) {
 				
-				try {
-					
+				try {					
 									
 					if (borraFileName != null && !borraFileName.equals("")) {
 						borra(req, resp, gallery, borraFileName);
 					} else if (subirOrden != null && !subirOrden.equals("")) {
-						subirOrden(req, resp, gallery, subirOrden, ordenActual, isFotoPrincipal);
+						subirOrden(req, resp, galeria, subirOrden, ordenActual, isFotoPrincipal);
 					} else if (bajarOrden != null && !bajarOrden.equals("")) {
-						bajarOrden(req, resp, gallery, bajarOrden, ordenActual, isFotoPrincipal);
+						bajarOrden(req, resp, galeria, bajarOrden, ordenActual, isFotoPrincipal);
 					} 
 										
 					if(viviendaDetalle != null && !"".equalsIgnoreCase(viviendaDetalle)) {
 						
-						cargaDetalle(req, resp, gallery, viviendaDetalle);
+						List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(gallery); 
+						for(int i=0; i<fotos.size(); i++) {
+							 if(!fotos.get(i).getTitle().equals(viviendaDetalle)) {
+								 fotos.remove(i);
+							 }
+						}						 
+						req.setAttribute("fotos", fotos); 
 						req.setAttribute("vivienda", viviendaDetalle);
 						dispatcher = req.getRequestDispatcher("WEB-INF/templates/detalle.jsp");
 						
 					}else {
 						
-						cargaGallery(req, resp, gallery);
+						cargaGallery(req, resp, galeria);
 						dispatcher = req.getRequestDispatcher("WEB-INF/templates/viviendas.jsp");
 						
 					}
@@ -94,7 +106,6 @@ public class Upload extends HttpServlet {
 				}
 			} else {
 				
-				PersistenceManager pm = PMF.get().getPersistenceManager();
 				Gallery principal = null;
 				try {
 					principal = GaleriaDAO.getGalleryByName(pm, "principal");
@@ -123,12 +134,7 @@ public class Upload extends HttpServlet {
 	}
 	
 	
-	public void cargaDetalle(HttpServletRequest req, HttpServletResponse resp, String galeria, String title) {
-		
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
-		req.setAttribute("fotos", GaleriaDAO.getFotosOrdenadas(gallery));
-	}
+	
 	
 	
 	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, String ordenActual, 
@@ -164,11 +170,10 @@ public class Upload extends HttpServlet {
 		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
 	}
 	
-	public void borra(HttpServletRequest req, HttpServletResponse resp, String galeria, String filename)
+	public void borra(HttpServletRequest req, HttpServletResponse resp, Gallery gallery, String filename)
 			throws IOException {
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		try {
-			Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
+		
+		try {			
 			MediaObject fotoBorrar = null;
 			for (Iterator<MediaObject> iterator = gallery.getFotos().iterator(); iterator.hasNext();) {
 				MediaObject foto = (MediaObject) iterator.next();
@@ -183,7 +188,7 @@ public class Upload extends HttpServlet {
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);
 		}
-		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).toString());
+		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(gallery.getName()).toString());
 	}
 	
 }
