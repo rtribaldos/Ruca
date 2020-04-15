@@ -8,7 +8,7 @@
   String authURL = (String) request.getAttribute("authURL");
   String uploadURL = (String) request.getAttribute("uploadURL");
   Gallery gallery = (Gallery) request.getAttribute("galeria");
-  List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(gallery);
+  List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(gallery, true);
   int contador=0;
 %>
 <!DOCTYPE html>

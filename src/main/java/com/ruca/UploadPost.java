@@ -91,16 +91,17 @@ public class UploadPost extends HttpServlet {
 		}
 		
 		Integer orden = 1;
+		Integer ordenEnGaleria = 1;
 		if (gallery != null) {
 			if(bPrincipal) {
-				orden = getLastOrder(gallery.getPrincipales());
+				ordenEnGaleria = getLastOrder(gallery.getPrincipales());
 			}else {
 				orden = getLastOrder(gallery.getFotos());
 			}
 		}
 		
 		MediaObject mediaObj = new MediaObject(user, blobKey, creation, contentType, fileName, size, title, description,
-				true, gallery, bPrincipal, anterior, "", orden);		
+				true, gallery, bPrincipal, anterior, "", orden, ordenEnGaleria);		
 		gallery.addPhoto(mediaObj);
 		
 		tx.commit();

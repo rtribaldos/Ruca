@@ -111,7 +111,7 @@
 							<div id="gallery">
 							<%
 							if(galeria != null){
-								List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria);
+								List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria, false);
 								for(MediaObject foto: fotos){ 
 									if(vivienda.equals(foto.getTitle())){
 										contador++; 

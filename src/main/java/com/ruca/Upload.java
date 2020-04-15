@@ -1,6 +1,7 @@
 package com.ruca;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -84,10 +85,11 @@ public class Upload extends HttpServlet {
 										
 					if(viviendaDetalle != null && !"".equalsIgnoreCase(viviendaDetalle)) {
 						
-						List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(gallery); 
-						for(int i=0; i<fotos.size(); i++) {
-							 if(!fotos.get(i).getTitle().equals(viviendaDetalle)) {
-								 fotos.remove(i);
+						List<MediaObject> fotosOrdenadas = GaleriaDAO.getFotosOrdenadas(gallery, false);
+						List<MediaObject> fotos = new ArrayList<>();
+						for(int i=0; i < fotosOrdenadas.size(); i++) {
+							 if(fotosOrdenadas.get(i).getTitle().equals(viviendaDetalle)) {
+								 fotos.add(fotosOrdenadas.get(i));
 							 }
 						}						 
 						req.setAttribute("fotos", fotos); 

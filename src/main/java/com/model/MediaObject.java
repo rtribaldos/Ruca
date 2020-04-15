@@ -75,13 +75,18 @@ public class MediaObject implements Cloneable{
 
 	@Persistent
 	private Integer orden;
+	
+	@Persistent
+	private Integer orderInGallery;
+	
 
 	private static final List<String> IMAGE_TYPES = Arrays.asList("image/png", "image/jpeg", "image/tiff", "image/gif",
 			"image/bmp");
 
 	public MediaObject(User owner, BlobKey blob, Date creationTime, String contentType, String filename, Long size,
 			String title, String description, Boolean isPublic, Gallery gallery, Boolean isPrincipal, String textAntes,
-			String testDespues, Integer orden) {
+			String testDespues, Integer orden,  Integer orderInGallery) {
+		
 		this.blob = blob;
 		this.owner = owner;
 		this.creation = creationTime;
@@ -96,6 +101,7 @@ public class MediaObject implements Cloneable{
 		this.textAntes = textAntes;
 		this.textDespues = testDespues;
 		this.orden = orden;
+		this.orderInGallery = orderInGallery;
 	}
 
 	public Key getKey() {
@@ -243,7 +249,7 @@ public class MediaObject implements Cloneable{
 		this.orden = orden;
 	}
 
-	 public Object clone(){
+	public Object clone(){
         Object obj=null;
         try{
             obj=super.clone();
@@ -252,5 +258,31 @@ public class MediaObject implements Cloneable{
         }
         return obj;
     }
+
+	public Boolean getIsPublic() {
+		return isPublic;
+	}
+
+	public void setIsPublic(Boolean isPublic) {
+		this.isPublic = isPublic;
+	}
+
+	public Boolean getIsPrincipal() {
+		return isPrincipal;
+	}
+
+	public void setIsPrincipal(Boolean isPrincipal) {
+		this.isPrincipal = isPrincipal;
+	}
+
+	public Integer getOrderInGallery() {
+		return orderInGallery;
+	}
+
+	public void setOrderInGallery(Integer orderInGallery) {
+		this.orderInGallery = orderInGallery;
+	}
+	 
+	 
 	
 }

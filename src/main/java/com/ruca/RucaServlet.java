@@ -83,7 +83,7 @@ public class RucaServlet extends HttpServlet {
 						GaleriaDAO.createGallery(pm, "oficinas");
 					}
 					galeria = GaleriaDAO.getGalleryByName(pm, gallery);
-					List<MediaObject> photos = GaleriaDAO.getFotosOrdenadas(galeria);
+					List<MediaObject> photos = GaleriaDAO.getFotosOrdenadas(galeria, true);
 					if (photos != null && photos.size() > 0) {
 						for (MediaObject foto : photos) {
 							if (vivienda != null && !vivienda.equals("")) {

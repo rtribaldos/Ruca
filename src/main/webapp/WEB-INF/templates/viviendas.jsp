@@ -59,9 +59,9 @@
 									if (foto != null) {
 										orden = foto.getOrden() + 1;
 										String urlSortUp = "/upload?galeria=" + gallery.getName() + "&subirOrden=" + foto.getTitle()
-											+ "&ordenActual=" + foto.getOrden() + "&principal=true";
+											+ "&ordenActual=" + foto.getOrderInGallery() + "&principal=true";
 										String urlSortDown = "/upload?galeria=" + gallery.getName() + "&bajarOrden=" + foto.getTitle()
-											+ "&ordenActual=" + foto.getOrden() + "&principal=true";
+											+ "&ordenActual=" + foto.getOrderInGallery() + "&principal=true";
 										String urlBorrado="/upload?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
 										String urlDetalle="/upload?galeria=" + gallery.getName() + "&detalle=" + foto.getTitle();
 										

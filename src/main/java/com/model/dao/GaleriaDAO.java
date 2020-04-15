@@ -44,13 +44,17 @@ public class GaleriaDAO {
 		}
 	}
 	
-	public static ArrayList getFotosOrdenadas(Gallery galeria) {
+	public static ArrayList getFotosOrdenadas(Gallery galeria, boolean principal) {
 		ArrayList<MediaObject> fotos = new ArrayList<>();
 		Integer orden = 1;
 		if(galeria != null && galeria.getFotos().size() > 0) {
 			while(fotos.size() < galeria.getFotos().size()) {
 				for(MediaObject foto : galeria.getFotos()) {
-					if(foto.getOrden() == orden) {
+					int ordenFoto = foto.getOrden();
+					if(principal) {
+						ordenFoto = foto.getOrderInGallery();
+					}
+					if(ordenFoto == orden) {
 						fotos.add(foto);
 						++orden;
 					}
@@ -95,10 +99,10 @@ public class GaleriaDAO {
 						foto.setOrden(orderNew);
 					}
 				} else {
-					if (foto.getOrden().intValue() == orderNew) {
-						foto.setOrden(-1);
-					} else if (foto.getOrden().intValue() == orderOld) {
-						foto.setOrden(orderNew);
+					if (foto.getOrderInGallery().intValue() == orderNew) {
+						foto.setOrderInGallery(-1);
+					} else if (foto.getOrderInGallery().intValue() == orderOld) {
+						foto.setOrderInGallery(orderNew);
 					}
 				}
 				
@@ -110,8 +114,8 @@ public class GaleriaDAO {
 						foto.setOrden(orderOld);
 					}
 				} else {
-					if (foto.getOrden().intValue() == -1) {
-						foto.setOrden(orderOld);
+					if (foto.getOrderInGallery().intValue() == -1) {
+						foto.setOrderInGallery(orderOld);
 					}
 				}
 			}			
@@ -140,10 +144,10 @@ public class GaleriaDAO {
 						foto.setOrden(orderNew);
 					}
 				} else {
-					if (foto.getOrden().intValue() == orderNew) {
-						foto.setOrden(-1);
-					} else if (foto.getOrden().intValue() == orderOld) {
-						foto.setOrden(orderNew);
+					if (foto.getOrderInGallery().intValue() == orderNew) {
+						foto.setOrderInGallery(-1);
+					} else if (foto.getOrderInGallery().intValue() == orderOld) {
+						foto.setOrderInGallery(orderNew);
 					}
 				}
 				
@@ -155,8 +159,8 @@ public class GaleriaDAO {
 						foto.setOrden(orderOld);
 					}
 				} else {
-					if (foto.getOrden().intValue() == -1) {
-						foto.setOrden(orderOld);
+					if (foto.getOrderInGallery().intValue() == -1) {
+						foto.setOrderInGallery(orderOld);
 					}
 				}
 			}
