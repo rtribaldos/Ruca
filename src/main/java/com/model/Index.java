@@ -72,7 +72,7 @@ public class Index extends HttpServlet {
 			try {
 				galeria = GaleriaDAO.getGalleryByName(pm, "Principal");
 				if (galeria != null && galeria.getFotos() != null && galeria.getFotos().size() > 0) {
-					Collections.sort(galeria.getFotos(), new PhotoComparator());
+					Collections.sort(galeria.getFotos(), new PhotoComparator(true));
 					results.addAll(galeria.getFotos());
 				}
 			} catch (Exception e) {

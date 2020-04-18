@@ -112,7 +112,7 @@ public class Upload extends HttpServlet {
 				try {
 					principal = GaleriaDAO.getGalleryByName(pm, "principal");
 					if (principal != null && principal.getFotos() != null && principal.getFotos().size() > 0) {
-						Collections.sort(principal.getFotos(), new PhotoComparator());
+						Collections.sort(principal.getFotos(), new PhotoComparator(true));
 					}
 				} catch (Exception e1) {
 					LogsManager.showError(e1.getMessage(), e1);
@@ -130,7 +130,7 @@ public class Upload extends HttpServlet {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Gallery gallery = GaleriaDAO.getGalleryByName(pm, galeria);
 		if (gallery != null && gallery.getFotos() != null && gallery.getFotos().size() > 0) {
-			Collections.sort(gallery.getFotos(), new PhotoComparator());
+			Collections.sort(gallery.getFotos(), new PhotoComparator(true));
 		}				
 		req.setAttribute("galeria", gallery);
 	}

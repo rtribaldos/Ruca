@@ -90,7 +90,7 @@ public class Gallery {
 				photos.add(foto);
 			}
 		}
-		Collections.sort(photos, new PhotoComparator());		
+		Collections.sort(photos, new PhotoComparator(true));		
 		return photos;
 	
 	}
@@ -104,7 +104,7 @@ public class Gallery {
 				photos.add(foto);
 			}
 		}
-		Collections.sort(photos, new PhotoComparator());		
+		Collections.sort(photos, new PhotoComparator(false));		
 		return photos;
 	
 	}
