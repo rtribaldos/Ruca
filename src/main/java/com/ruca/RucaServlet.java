@@ -83,21 +83,21 @@ public class RucaServlet extends HttpServlet {
 						GaleriaDAO.createGallery(pm, "oficinas");
 					}
 					galeria = GaleriaDAO.getGalleryByName(pm, gallery);
-					List<MediaObject> photos = GaleriaDAO.getFotosOrdenadas(galeria, true);
-					if (photos != null && photos.size() > 0) {
+					
+					List<MediaObject> photos;
+					if (vivienda != null && !vivienda.equals("")) {
+						photos = galeria.getFotosVivienda(vivienda);
 						for (MediaObject foto : photos) {
-							if (vivienda != null && !vivienda.equals("")) {
-								if (vivienda.equals(foto.getTitle())) {
-									if (!"".equals(foto.getTextAntes())) {
-										tieneAntes = true;
-									}
-								}
+							if (!"".equals(foto.getTextAntes())) {
+								tieneAntes = true;
 							}
 						}								
+					}else {
+						photos = galeria.getPrincipales();
 					}
 					
 					req.setAttribute("galeria", galeria);
-				//	req.setAttribute("fotos", photos);
+					req.setAttribute("fotos", photos);
 					if (antes == null) {
 						antes = "";
 					}

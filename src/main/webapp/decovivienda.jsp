@@ -10,7 +10,7 @@
   String vivienda = (String) request.getAttribute("vivienda");
   String nomVivienda = (String) request.getAttribute("desc");
   Gallery galeria = (Gallery) request.getAttribute("galeria");
-  List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria, false);
+  List<MediaObject> fotos = (List<MediaObject>) request.getAttribute("fotos");
   int contador=0;
 %>
 
@@ -84,17 +84,16 @@
 							<%
 							if(galeria != null){								
 								for(MediaObject foto: fotos){ 
-									if(vivienda.equals(foto.getTitle())){
 										contador++; 
 							%>
-											<div class="photoDiv">
-												<p><a  href="<%=foto.getURLPath()%>" title="<%=nomVivienda%>">
-												<img src="<%=foto.getURLPath()%>" alt="<%=foto.getTitle()%>" style="display: block; height: 200px; margin:0px; padding:0px; border: 1px solid white"/></a></p>
-											</div>
+										<div class="photoDiv">
+											<p><a  href="<%=foto.getURLPath()%>" title="<%=nomVivienda%>">
+											<img src="<%=foto.getURLPath()%>" alt="<%=foto.getTitle()%>" style="display: block; height: 200px; margin:0px; padding:0px; border: 1px solid white"/></a></p>
+										</div>
 							
 							<%
-									}
 								}
+								
 							}
 							%>	
 									

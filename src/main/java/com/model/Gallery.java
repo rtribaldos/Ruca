@@ -90,10 +90,23 @@ public class Gallery {
 				photos.add(foto);
 			}
 		}
-		Collections.sort(photos, new PhotoComparator());
-		
-		
+		Collections.sort(photos, new PhotoComparator());		
 		return photos;
 	
 	}
+	
+	public List<MediaObject> getFotosVivienda(String vivienda) {
+		
+		List<MediaObject> photos = new ArrayList<>();
+		
+		for(MediaObject foto : this.fotos) {
+			if(vivienda.toUpperCase().equals(foto.getTitle().toUpperCase())) {
+				photos.add(foto);
+			}
+		}
+		Collections.sort(photos, new PhotoComparator());		
+		return photos;
+	
+	}
+	
 }

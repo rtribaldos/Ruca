@@ -63,6 +63,28 @@ public class GaleriaDAO {
 		}
 		return fotos;
 	}
+	
+	
+	
+	/*public static ArrayList getFotosOrdenadasVivienda(Gallery galeria, String vivienda, boolean principal) {
+		ArrayList<MediaObject> fotos = new ArrayList<>();
+		Integer orden = 1;
+		if(galeria != null && galeria.getFotos().size() > 0) {
+			while(fotos.size() < galeria.getFotos().size()) {
+				for(MediaObject foto : galeria.getFotos()) {
+					int ordenFoto = foto.getOrden();
+					if(principal) {
+						ordenFoto = foto.getOrderInGallery();
+					}
+					if(ordenFoto == orden) {
+						fotos.add(foto);
+						++orden;
+					}
+				}
+			}
+		}
+		return fotos;
+	}*/
 
 	
 	public static List getGalerias(PersistenceManager pm) throws Exception {

@@ -85,13 +85,13 @@ public class Upload extends HttpServlet {
 										
 					if(viviendaDetalle != null && !"".equalsIgnoreCase(viviendaDetalle)) {
 						
-						List<MediaObject> fotosOrdenadas = GaleriaDAO.getFotosOrdenadas(gallery, false);
-						List<MediaObject> fotos = new ArrayList<>();
+						List<MediaObject> fotos = gallery.getFotosVivienda(viviendaDetalle);
+						/*List<MediaObject> fotos = new ArrayList<>();
 						for(int i=0; i < fotosOrdenadas.size(); i++) {
 							 if(fotosOrdenadas.get(i).getTitle().equals(viviendaDetalle)) {
 								 fotos.add(fotosOrdenadas.get(i));
 							 }
-						}						 
+						}*/						 
 						req.setAttribute("fotos", fotos); 
 						req.setAttribute("vivienda", viviendaDetalle);
 						dispatcher = req.getRequestDispatcher("WEB-INF/templates/detalle.jsp");
