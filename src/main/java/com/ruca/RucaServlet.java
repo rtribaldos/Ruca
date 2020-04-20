@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Transaction;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

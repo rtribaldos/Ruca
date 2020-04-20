@@ -1,7 +1,6 @@
 package com.ruca;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -86,12 +85,6 @@ public class Upload extends HttpServlet {
 					if(viviendaDetalle != null && !"".equalsIgnoreCase(viviendaDetalle)) {
 						
 						List<MediaObject> fotos = gallery.getFotosVivienda(viviendaDetalle);
-						/*List<MediaObject> fotos = new ArrayList<>();
-						for(int i=0; i < fotosOrdenadas.size(); i++) {
-							 if(fotosOrdenadas.get(i).getTitle().equals(viviendaDetalle)) {
-								 fotos.add(fotosOrdenadas.get(i));
-							 }
-						}*/						 
 						req.setAttribute("fotos", fotos); 
 						req.setAttribute("vivienda", viviendaDetalle);
 						dispatcher = req.getRequestDispatcher("WEB-INF/templates/detalle.jsp");
@@ -134,10 +127,7 @@ public class Upload extends HttpServlet {
 		}				
 		req.setAttribute("galeria", gallery);
 	}
-	
-	
-	
-	
+		
 	
 	public void subirOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, String ordenActual, 
 			boolean isPrincipal) throws IOException {

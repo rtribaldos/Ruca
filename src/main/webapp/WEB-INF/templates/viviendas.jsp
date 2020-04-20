@@ -110,7 +110,7 @@
                         <input type="file" name="file">
                         <br />
                         <input type="hidden" name="principal" id="yes" value="yes" />
-                        <input type="hidden" name="op" value="decoracion" />
+                        <input type="hidden" name="op" value="<%=gallery.getName()%>" />
                      </fieldset>
                      
                      

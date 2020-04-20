@@ -84,9 +84,15 @@ public class Gallery {
 		List<MediaObject> photos = new ArrayList<>();
 		
 		//fotos.stream().filter(foto -> foto.isPrincipal().booleanValue()).forEach(System.out::println);
+		int ordenNew=1;
 		
 		for(MediaObject foto : this.fotos) {
 			if(foto.isPrincipal()) {
+				if(foto.getOrderInGallery() == null) {
+					foto.setOrderInGallery(ordenNew);
+					foto.setOrden(1);
+					++ordenNew;
+				}
 				photos.add(foto);
 			}
 		}
@@ -98,9 +104,14 @@ public class Gallery {
 	public List<MediaObject> getFotosVivienda(String vivienda) {
 		
 		List<MediaObject> photos = new ArrayList<>();
-		
+		int ordenNew=1;
 		for(MediaObject foto : this.fotos) {
 			if(vivienda.toUpperCase().equals(foto.getTitle().toUpperCase())) {
+				if(foto.getOrden() == null) {
+					foto.setOrden(ordenNew);
+					foto.setOrderInGallery(1);
+					++ordenNew;
+				}
 				photos.add(foto);
 			}
 		}

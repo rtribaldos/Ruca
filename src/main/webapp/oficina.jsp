@@ -10,7 +10,7 @@
   String oficina = (String) request.getAttribute("oficina");
   String nomOficina = (String) request.getAttribute("desc");
   Gallery galeria = (Gallery) request.getAttribute("galeria");
-  List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria, false);
+  List<MediaObject> fotos = (List<MediaObject>) request.getAttribute("fotos");
   int contador=0;
 %>
 

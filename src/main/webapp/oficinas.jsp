@@ -8,7 +8,7 @@
   String authURL = (String) request.getAttribute("authURL");
   String uploadURL = (String) request.getAttribute("uploadURL");
   Gallery galeria = (Gallery) request.getAttribute("galeria");
-  List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria, true);
+  List<MediaObject> fotos = (List<MediaObject>) request.getAttribute("fotos");
   int contador=0;
 %>
 
@@ -263,8 +263,7 @@
 							<p><h5><b>PROYECTOS > OFICINAS</b></h5></p> <BR>
 							<%
 							if(galeria != null){
-								for(MediaObject foto: fotos){
-									if(foto.isPrincipal()){
+								for(MediaObject foto: fotos){									
 										String urlName="/?galeria=oficinas&nombre=" + foto.getTitle()+"&desc="+foto.getDescription() ;
 										contador++; 
 							%>
@@ -275,7 +274,6 @@
 									</div>									
 							
 							<%
-									}
 								}
 							}
 							%>	

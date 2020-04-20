@@ -12,6 +12,7 @@
   Gallery galeria = (Gallery) request.getAttribute("galeria");
   String antes = (String) request.getAttribute("antes");
   String tieneAntes = (String) request.getAttribute("tieneAntes");
+  List<MediaObject> fotos = (List<MediaObject>) request.getAttribute("fotos");
   if(tieneAntes==null) tieneAntes="";
   if(antes != null && !"".equals(antes)) antes=" > ANTES DE REFORMAR";
   else antes="";
@@ -111,7 +112,6 @@
 							<div id="gallery">
 							<%
 							if(galeria != null){
-								List<MediaObject> fotos = GaleriaDAO.getFotosOrdenadas(galeria, false);
 								for(MediaObject foto: fotos){ 
 									if(vivienda.equals(foto.getTitle())){
 										contador++; 
