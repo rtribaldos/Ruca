@@ -106,18 +106,15 @@ public class UploadPost extends HttpServlet {
 		
 		tx.commit();
 		pm.close();
+
+		String redireccion="/upload?galeria=" + op;
 		
-		if (op.equals("obraNueva")) {
-			resp.sendRedirect("/upload?galeria=obraNueva");
-		} else if (op.equals("decoracion")) {
-			resp.sendRedirect("/upload?galeria=decoracion");
-		} else if (op.equals("oficinas")) {
-			resp.sendRedirect("/upload?galeria=oficinas");
-		} else if (op.equals("reformas")) {
-			resp.sendRedirect("/upload?galeria=reformas");
-		} else {
-			resp.sendRedirect("/upload");
+		if(!bPrincipal) {
+			redireccion += "&detalle=" + title;
 		}
+		
+		resp.sendRedirect(redireccion);
+		
 	}
 	
 	private Integer getLastOrder(List<MediaObject> photos) {

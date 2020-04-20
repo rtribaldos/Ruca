@@ -95,6 +95,8 @@ public class RucaServlet extends HttpServlet {
 						photos = galeria.getPrincipales();
 					}
 					
+					pm.makePersistentAll(photos);
+					
 					req.setAttribute("galeria", galeria);
 					req.setAttribute("fotos", photos);
 					if (antes == null) {
@@ -144,9 +146,6 @@ public class RucaServlet extends HttpServlet {
 						}
 					}
 					dispatcher.forward(req, resp);
-				
-						
-				
 			}
 		} catch (Exception e) {
 			LogsManager.showError(e.getMessage(), e);

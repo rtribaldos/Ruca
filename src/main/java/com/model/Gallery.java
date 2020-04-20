@@ -3,8 +3,8 @@ package com.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -83,6 +83,7 @@ public class Gallery {
 		
 		List<MediaObject> photos = new ArrayList<>();
 		
+		
 		//fotos.stream().filter(foto -> foto.isPrincipal().booleanValue()).forEach(System.out::println);
 		int ordenNew=1;
 		
@@ -104,7 +105,7 @@ public class Gallery {
 	public List<MediaObject> getFotosVivienda(String vivienda) {
 		
 		List<MediaObject> photos = new ArrayList<>();
-		int ordenNew=1;
+		int ordenNew=2;
 		for(MediaObject foto : this.fotos) {
 			if(vivienda.toUpperCase().equals(foto.getTitle().toUpperCase())) {
 				if(foto.getOrden() == null) {

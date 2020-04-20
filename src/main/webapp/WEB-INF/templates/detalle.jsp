@@ -74,7 +74,6 @@
                             	<td><a href="#"><%=foto.getFilename()%></a></td>
                             	
                             	<td class="a-center">
-									<%=foto.getOrden()%>
 									<a href="<%=urlSortUp%>">
 										<img src="img/icons/arrow_up_mini.gif" width="16" height="16" align="absmiddle" />
 									</a>
@@ -111,7 +110,7 @@
                         <input type="file" name="file">
                         <br />
                         <input type="hidden" name="principal" id="no" value="no" />
-                        <input type="hidden" name="op" value="decoracion" />
+                        <input type="hidden" name="op" value="<%=gallery.getName()%>" />
                      </fieldset>
                      
                      
