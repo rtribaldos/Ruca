@@ -51,7 +51,7 @@ public class Upload extends HttpServlet {
 		
 		
 		if (user.getEmail().equalsIgnoreCase("raultribaldos@gmail.com")	|| user.getEmail().equalsIgnoreCase("gracialafamilia@gmail.com")
-				|| user.getEmail().equalsIgnoreCase("alexei_lescaylle@yahoo.es")) {
+				|| user.getEmail().equalsIgnoreCase("alexei.les.dau@gmail.com")) {
 			
 			
 			String galeria = req.getParameter("galeria");
@@ -116,6 +116,7 @@ public class Upload extends HttpServlet {
 		} else {
 			dispatcher = req.getRequestDispatcher("/index.jsp");
 		}
+
 		dispatcher.forward(req, resp);
 	}
 
@@ -142,7 +143,11 @@ public class Upload extends HttpServlet {
 		}finally {
 			pm.close();
 		}
-		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
+		String destino ="/upload?galeria=" + galeria + "&ordenar=no";
+		if(!isPrincipal) {
+			destino += "&detalle=" + title;
+		}
+		resp.sendRedirect(destino);
 	}
 	
 	public void bajarOrden(HttpServletRequest req, HttpServletResponse resp, String galeria, String title, 
@@ -159,7 +164,11 @@ public class Upload extends HttpServlet {
 		}finally {
 			pm.close();
 		}
-		resp.sendRedirect((new StringBuilder("/upload?galeria=")).append(galeria).append("&ordenar=no").toString());
+		String destino ="/upload?galeria=" + galeria + "&ordenar=no";
+		if(!isPrincipal) {
+			destino += "&detalle=" + title;
+		}
+		resp.sendRedirect(destino);		
 	}
 	
 	public void borra(HttpServletRequest req, HttpServletResponse resp, Gallery gallery, String filename)
