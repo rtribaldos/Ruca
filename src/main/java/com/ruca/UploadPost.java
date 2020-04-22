@@ -94,9 +94,9 @@ public class UploadPost extends HttpServlet {
 		Integer ordenEnGaleria = 1;
 		if (gallery != null) {
 			if(bPrincipal) {
-				ordenEnGaleria = getLastOrder(gallery.getPrincipales());
+				ordenEnGaleria = gallery.getPrincipales().size() +1 ;
 			}else {
-				orden = getLastOrder(gallery.getFotos());
+				orden = gallery.getFotosVivienda(title).size() + 1;
 			}
 		}
 		
@@ -117,7 +117,7 @@ public class UploadPost extends HttpServlet {
 		
 	}
 	
-	private Integer getLastOrder(List<MediaObject> photos) {
+	/*private Integer getLastOrder(List<MediaObject> photos) {
 		Integer order = 0;
 		if (photos != null && photos.isEmpty()) {
 			order = 1;
@@ -132,5 +132,5 @@ public class UploadPost extends HttpServlet {
 			order++;
 		}		
 		return order;
-	}
+	}*/
 }
