@@ -48,6 +48,7 @@
                             	<th><a href="#">Descripci&oacute;n</a></th>
                             	<th><a href="#">Foto principal</a></th>
 								<th><a href="#">Orden</a></th>
+								<th><a href="#">Antes Ref.</a></th>
 								<th width="60px"><a href="#">Borrar</a></th>
                             </tr>
 						</thead>
@@ -81,7 +82,7 @@
 										<img src="img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" />
 									</a>									
 								</td>
-								
+								<td><a href="#"><%=foto.getTextAntes()%></a></td>
                             	<td class="a-center">
 		                    		<a href="<%=urlBorrado%>"><img src="img/icons/user_delete.png" title="Delete user" width="16" height="16" /></a>
 		                    	</td>
@@ -110,6 +111,8 @@
                         <input type="file" name="file">
                         <br />
                         <input type="hidden" name="principal" id="no" value="no" />
+                        <label for="anterior">Antes de reformar:</label>
+                        <input type="checkbox" name="anterior" id="anterior" value="SI" />
                         <input type="hidden" name="op" value="<%=gallery.getName()%>" />
                      </fieldset>
                      

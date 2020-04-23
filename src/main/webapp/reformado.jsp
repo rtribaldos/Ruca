@@ -85,12 +85,17 @@
 		<!-- content -->
 		<div class="wrapper">
 					
-							<div class="grid_6">
+							
 							<%
 							 String urlName="";
+							 String cssMiga = "grid_6";
 							 String urlNameBack="/Ruca?galeria=reformas";
-							 if(!"".equals(antes)) urlNameBack="/?galeria=reformas&nombre=" + vivienda+"&desc="+ nomVivienda ;
+							 if(!"".equals(antes)){
+								 urlNameBack="/?galeria=reformas&nombre=" + vivienda+"&desc="+ nomVivienda ;
+								 cssMiga = "grid_12";
+							 }
 							%>
+							<div class="<%=cssMiga%>">
 							<h5><b>PROYECTOS > <a href="<%=urlNameBack%>">REFORMAS  > <%=nomVivienda%> <%=antes%></a></b>
 							</div>
 							<div class="grid_6">

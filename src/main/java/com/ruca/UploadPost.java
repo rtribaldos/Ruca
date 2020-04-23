@@ -116,21 +116,5 @@ public class UploadPost extends HttpServlet {
 		resp.sendRedirect(redireccion);
 		
 	}
-	
-	/*private Integer getLastOrder(List<MediaObject> photos) {
-		Integer order = 0;
-		if (photos != null && photos.isEmpty()) {
-			order = 1;
-		} else if (photos != null && photos.size() == 1) {
-			order =  photos.get(0).getOrden() + 1;
-		} else if (photos != null && photos.size() > 1) {
-			for (MediaObject photo : photos) {
-				if (photo.getOrden() > order) {
-					order = photo.getOrden();
-				}
-			}
-			order++;
-		}		
-		return order;
-	}*/
+		
 }
