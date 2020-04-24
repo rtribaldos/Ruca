@@ -66,7 +66,7 @@
 								for (int i = 0; i < gallery.getFotos().size(); i++) {
 									MediaObject foto = gallery.getFotos().get(i);
 									if (foto != null) {
-										String urlBorrado = "/Ruca?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
+										String urlBorrado = "/upload?galeria=" + gallery.getName() + "&borrar=" + foto.getFilename();
 							%>
 							<tr>
 								<td class="a-center"><%=++contador%></td>
