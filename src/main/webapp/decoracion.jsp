@@ -245,10 +245,10 @@
 							<li><a href="/"><center>INICIO</center></a></li>					
 							<li class="current"><center><a href="#">PROYECTOS</a></center>
 								<ul>
-									<li><a href="/Ruca?galeria=obraNueva"><center>OBRA NUEVA</center></a></li>
-									<li><a href="/Ruca?galeria=reformas"><center>REFORMAS</center></a></li>
 									<li><a href="/Ruca?galeria=decoracion"><center>DECORACI&Oacute;N</center></a></li>
-									<li><a href="/Ruca?galeria=oficinas"><center>OFICINAS</center></a></li>	
+									<li><a href="/Ruca?galeria=reformas"><center>REFORMAS</center></a></li>
+									<li><a href="/Ruca?galeria=obraNueva"><center>OBRA NUEVA</center></a></li>
+									<li><a href="/Ruca?galeria=oficinas"><center>OFICINAS</center></a></li>
 								</ul>
 							</li>
 							<li ><a href="/contacto.jsp"><center>CONTACTO</center></a></li>

@@ -90,10 +90,10 @@
 							<li><a href="/">INICIO</a></li>
 							<li><a href="#">PROYECTOS</a>
 								<ul>
-									<li><a href="/Ruca?galeria=obraNueva">OBRA NUEVA</a></li>
-									<li><a href="/Ruca?galeria=reformas">REFORMAS</a></li>
-									<li><a href="/Ruca?galeria=decoracion">DECORACI&Oacute;N</a></li>
-									<li><a href="/Ruca?galeria=oficinas">OFICINAS</a></li>		
+									<li><a href="/Ruca?galeria=decoracion"><center>DECORACI&Oacute;N</center></a></li>
+									<li><a href="/Ruca?galeria=reformas"><center>REFORMAS</center></a></li>
+									<li><a href="/Ruca?galeria=obraNueva"><center>OBRA NUEVA</center></a></li>
+									<li><a href="/Ruca?galeria=oficinas"><center>OFICINAS</center></a></li>
 								</ul>
 							</li>
 							<li ><a href="/contacto.jsp">CONTACTO</a></li>
