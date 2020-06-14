@@ -56,7 +56,7 @@
 			<!-- header -->
 				<div class="wrapper block-1">
 					<div>
-						<h1><img src="images/logoT2.png" /></h1>
+						<a href="/"><h1><img src="images/logoT2.png" /></h1></a>
 					</div>
 				</div>
 				
@@ -64,7 +64,6 @@
 					<!-- menu -->
 					<nav>
 						<ul class="sf-menu">
-							<li><a href="/"><center>INICIO</center></a></li>					
 							<li class="current"><center><a href="#">PROYECTOS</a></center>
 								<ul>
 									<li><a href="/Ruca?galeria=decoracion"><center>DECORACI&Oacute;N</center></a></li>
@@ -73,6 +72,7 @@
 									<li><a href="/Ruca?galeria=oficinas"><center>OFICINAS</center></a></li>
 								</ul>
 							</li>
+							<li ><a href="/filosofia.jsp"><center>FILOSOFIA</center></a></li>
 							<li ><a href="/contacto.jsp"><center>CONTACTO</center></a></li>
 						</ul>
 						
@@ -146,11 +146,14 @@
 	<div class="container_12">
 		<hr>
 			<div class="wrapper">
-				<div class="grid_6">
+				<div class="grid_4">
 				<p style='font:11px/21px "Trebuchet MS", Helvetica, sans-serif;'>C/ Salv&aacute; 8, 5&ordm;-9 - Valencia  963 253 539 / 609 855 196</p>
 				</div>
-				<div class="grid_6">
-				<a href="/upload"><p align="right" style='color: #6f6f71; font:11px/21px "Trebuchet MS", Helvetica, sans-serif;'>&copy; RUCA INTERIORES S.L.</p></a>
+				<div class="grid_4">
+					<a href="https://instagram.com/graciarubioestudio"><p align="center"><img src="images/instagram.png" height="26px"  alt="Instagram" ></p></a>
+				</div>			
+				<div class="grid_4">
+					<a href="/upload"><p align="right" style='color: #6f6f71; font:11px/21px "Trebuchet MS", Helvetica, sans-serif;'>&copy; RUCA INTERIORES S.L.</p></a>
 				</div>
 			</div>
 	</div>

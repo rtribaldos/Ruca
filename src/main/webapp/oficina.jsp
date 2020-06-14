@@ -51,7 +51,7 @@
 			
 				<div class="wrapper block-1">
 					<div>
-						<h1><img src="images/logoT2.png" /></h1>
+						<a href="/"><h1><img src="images/logoT2.png" /></h1></a>
 					</div>
 					
 				</div>
@@ -60,7 +60,7 @@
 					<!-- menu -->
 					<nav>
 						<ul class="sf-menu">
-							<li><a href="/"><center>INICIO</center></a></li>					
+												
 							<li class="current"><center><a href="#">PROYECTOS</a></center>
 								<ul>
 									<li><a href="/Ruca?galeria=decoracion"><center>DECORACI&Oacute;N</center></a></li>
@@ -69,6 +69,7 @@
 									<li><a href="/Ruca?galeria=oficinas"><center>OFICINAS</center></a></li>
 								</ul>
 							</li>
+							<li><a href="/filosofia.jsp"><center>FILOSOFIA</center></a></li>
 							<li ><a href="/contacto.jsp"><center>CONTACTO</center></a></li>
 						</ul>
 						
