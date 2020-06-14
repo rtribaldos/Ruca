@@ -1,7 +1,7 @@
 account.email=raultribaldos@gmail.com
 eclipse.preferences.version=1
-include.optional.configuration.files=false
-project.bucket=
+include.optional.configuration.files=true
+project.bucket=backupruca
 project.id=rucainteriores
 project.previousVersion.stop=true
 project.promote=false
