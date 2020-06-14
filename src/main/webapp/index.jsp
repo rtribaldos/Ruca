@@ -93,7 +93,7 @@
 		<div class="block-0">
 			<div class="wrapper block-1">
 					<div>
-						<h1><img src="images/logoT2.png" /></h1>
+						<a href="/"><h1><img src="images/logoT2.png" /></h1></a>
 					</div>
 					
 				</div>
@@ -103,7 +103,6 @@
 					<!-- menu -->
 					<nav>
 						<ul class="sf-menu">
-							<li><a href="/"><center>INICIO</center></a></li>					
 							<li class="current"><center><a href="#">PROYECTOS</a></center>
 								<ul>
 									<li><a href="/Ruca?galeria=decoracion"><center>DECORACI&Oacute;N</center></a></li>
@@ -112,6 +111,7 @@
 									<li><a href="/Ruca?galeria=oficinas"><center>OFICINAS</center></a></li>	
 								</ul>
 							</li>
+							<li ><a href="/filosofia.jsp"><center>FILOSOFIA</center></a></li>
 							<li ><a href="/contacto.jsp"><center>CONTACTO</center></a></li>
 						</ul>
 						
@@ -131,7 +131,7 @@
 							%>
 							
 							<li>
-								<img src="<%=foto.getURLPath() %>" alt="" height="360px" width="960px">
+								<img src="<%=foto.getURLPath() %>" alt="" width="960px" height="653px">
 							</li>
 							<%
 								}
@@ -146,60 +146,22 @@
 							
 						</ul>
 						
-						<div class="grid_4">
-							<a href="/Ruca?galeria=obraNueva"><p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color: #b4b08c;'>OBRA NUEVA</p></a><hr/>
-										<p>Asesor&iacute;a en cualquiera de las fases en la que se encuentre la obra. Desde
-	el inicio del Proyecto de Arquitectura, colaborando con el arquitecto y participando en
-	la planta de distribuci&oacute;n de la vivienda as&iacute; como en la memoria de calidades, haciendo el seguimiento durante toda la obra y su posterior decoraci&oacute;n.<br>
-										La memoria de calidades incluye:<br>
-										- Suelos y revestimientos.<br>
-										- Saneamiento y grifer&iacute;as.<br>
-										- Iluminaci&oacute;n: Interruptores, focos y apliques.<br>
-										- Puertas, manivelas y pomos y distribuci&oacute;n de armarios y mobiliario a medida.<br>
-										- Mobiliario de cocina.</p>
-						</div>
-						<div class="grid_4">
-							<a href="/Ruca?galeria=reformas"><p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color: #b4b08c;'>REFORMA DE INTERIORES</p></a><hr/>
-										<p align="left">Asesor&iacute;a en la nueva distribuci&oacute;n de la vivienda en base a los requisitos de reforma
-									planteados por el cliente. La reforma puede ser integral o de alguno de los espacios.
-									<br>Para ello, se realizar&aacute; el Levantamiento de Planos necesario y se definir&aacute; la memoria
-									de calidades teniendo en cuenta los materiales empleados en el resto de la vivienda y
-									que no van a ser sustituidos. Adem&aacute;s del proyecto de reforma de interiores se puede
-									contratar la coordinaci&oacute;n y/o el seguimiento de la reforma que puede incluir:<br><br></p>
-									<table width="293px">
-									<tr>
-										<td align="left" bgcolor="#b4b08c"><a class="modal" href="javascript:void(0);">
-										<p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color:white' align="center"> + VER M&Aacute;S </p></a></td>
-										<td width="30%"></td>
-										<td align="right" bgcolor="#b4b08c"><a class="ejemplos" href="javascript:void(0);"><p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color: white' align="center">+ VER EJEMPLOS</p></a></td>
-									</tr>
-									</table>
-						</div>
-						<div class="grid_4">
-							<a href="/Ruca?galeria=decoracion"><p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color: #b4b08c;'>DECORACI&Oacute;N</p></a><hr/>
-										<p>Asesor&iacute;a en todo lo concerniente a la decoraci&oacute;n de interiores, tanto de viviendas como de oficinas:<br>
-										- Pintura, empapelados, alfombras y moquetas.<br>
-										- Compra de mobiliario, tanto de interior como de exterior, l&aacute;mparas, objetos
-	decorativos, arte y antig&uuml;edades.<br>
-										- Dise&ntilde;o y confecci&oacute;n de mobiliario y librer&iacute;as a medida, retapizado de muebles antiguos.<br>
-										- Confecci&oacute;n textil: cortinas, colchas, fundas...<br>
-										- Instalaci&oacute;n de screen o venecianas.<br>
-										- Instalaci&oacute;n de cuadros, espejos, mamparas.<br>
-						</div>
-							
+						<br>
+						<hr>
+							<div class="grid_4">
+								<p style='font:11px/21px "Trebuchet MS", Helvetica, sans-serif;'>C/ Salv&aacute; 8, 5&ordm;-9 - Valencia  963 253 539 / 609 855 196</p>
+							</div>
+							<div class="grid_4">
+								<a href="https://instagram.com/graciarubioestudio"><p align="center"><img src="images/instagram.png" height="26px"  alt="Instagram" ></p></a>
+							</div>
+							<div class="grid_4">
+								<a href="/upload"><p align="right" style='color: #6f6f71; font:11px/21px "Trebuchet MS", Helvetica, sans-serif;'>&copy; RUCA INTERIORES S.L.</p></a>
+							</div>													
 					</div>
-				</div>	
-			</div>
-			
-			<hr>
-			<div class="wrapper">
-				<div class="grid_6">
-				<p style='font:11px/21px "Trebuchet MS", Helvetica, sans-serif;'>C/ Salv&aacute; 8, 5&ordm;-9 - Valencia  963 253 539 / 609 855 196</p>
 				</div>
-				<div class="grid_6">
-				<a href="/upload"><p align="right" style='color: #6f6f71; font:11px/21px "Trebuchet MS", Helvetica, sans-serif;'>&copy; RUCA INTERIORES S.L.</p></a>
-				</div>
+									
 			</div>
+					
 	</div>
 	
 <script type="text/javascript">
@@ -216,6 +178,4 @@
 
 </script>	
 </body>
-
-<!-- Mirrored from static.livedemo00.template-help.com/wt_38557/index.html by HTTrack Website Copier/3.x [XR&CO'2010], Mon, 09 Apr 2012 19:51:29 GMT -->
 </html>
