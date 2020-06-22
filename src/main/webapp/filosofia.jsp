@@ -56,33 +56,35 @@
 		
 						<div class="grid_12">
 											<p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color: #b4b08c;'>FILOSOFIA</p><hr/>
-														<p>Desarrollamos un servicio personalizado, adaptado a las necesidades de cada cliente, creando
-											interiores actuales, funcionales, y acogedores.
-											Las claves para ello son: una estrecha relación con el cliente, visión global de los espacios, una
-											elección cuidada de los materiales y un diseño específico de los elementos que los conforman.
-											<br/>Más de 15 años de experiencia transformando espacios avalan nuestro trabajo. Contamos para
-											ello con un equipo de excelentes profesionales .
-											Centrados sobre todo en el ámbito residencial, las empresas también cuentan con nosotros para diseñar 
-											sus oficinas.</p>
-											<br/>
-						
+											<div class="ident-bot-14">
+												<img class="fleft image-border-1 ident-right-2" src="images/gracia2.jpg" alt="PROYECTOS DE REFORMA INTERIOR" style="display: block; border: 1px solid white"/>
+														<br/>
+														<div class="extra-wrap inner-ident-top-1">
+															<p>Desarrollamos un servicio personalizado, adaptado a las necesidades de cada cliente, creando
+													interiores actuales, funcionales, y acogedores.
+													Las claves para ello son: una estrecha relación con el cliente, visión global de los espacios, una
+													elección cuidada de los materiales y un diseño específico de los elementos que los conforman.
+													<br/>Más de 15 años de experiencia transformando espacios avalan nuestro trabajo. Contamos para
+													ello con un equipo de excelentes profesionales .
+													Centrados sobre todo en el ámbito residencial, las empresas también cuentan con nosotros para diseñar 
+													sus oficinas.</p>
+														</div>														
+												<br/>
+											</div>
+											<br/><br/><br/>
 											<p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color: #b4b08c;'>METODO DE TRABAJO</p><hr/>
 												<div class="ident-bot-14">
-												   <img class="fleft image-border-1 ident-right-2" src="images/gracia2.jpg" alt="PROYECTOS DE REFORMA INTERIOR" style="display: block; border: 1px solid white"/>
-													<div class="extra-wrap inner-ident-top-1">	
-																	<br><br>	
+												   <div class="extra-wrap inner-ident-top-1">
 																	<p>Tras reunirnos con el cliente y visitar el espacio,  recogemos todas las necesidades y requisitos.
 														Una vez aprobado el plan de trabajo,  el proyecto empieza a tomar forma primero en un plano
 														de distribución, para ir dotándolo después de imágenes que ayudarán a proyectar el resultado.
 														Si se trata de una reforma,  el proyecto se desarrollará según su alcance, generando los
 														bocetos, planos de instalaciones y detalles, además de una memoria de calidades con los
 														materiales a utilizar. Todo ello se proporcionará a la empresa constructora para elaborar un
-														presupuesto.</p><br><br><br><br><br>
+														presupuesto.</p><br>
 														
 													</div>
-												</div>
-											
-											<div class="ident-bot-14">
+												
 												<img class="fleft image-border-1 ident-right-2" src="images/colores.jpg" alt="PROYECTOS DE REFORMA INTERIOR" style="display: block; width: 252px; height: 205px;  border: 1px solid white"/>
 																<div class="extra-wrap inner-ident-top-1">
 																	La memoria de calidades incluye:<br>
@@ -96,8 +98,7 @@
 											
 																</div>
 																<div class="clear"></div>
-											</div>
-											
+											</div>							
 											
 											<p>
 											Si  se requiere la Decoración de la vivienda, tras la revisión de lo ya existente y el análisis de la
