@@ -66,14 +66,20 @@
 											<br/>
 						
 											<p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color: #b4b08c;'>METODO DE TRABAJO</p><hr/>
-														<p>Tras reunirnos con el cliente y visitar el espacio,  recogemos todas las necesidades y requisitos.
-											Una vez aprobado el plan de trabajo,  el proyecto empieza a tomar forma primero en un plano
-											de distribución, para ir dotándolo después de imágenes que ayudarán a proyectar el resultado.
-											Si se trata de un Reforma,  el proyecto se desarrollará según su alcance, generando los
-											bocetos, planos de instalaciones y detalles, además de una memoria de calidades con los
-											materiales a utilizar. Todo ello se proporcionará a la empresa constructora para elaborar un
-											presupuesto que contemple las partidas.</p>
-											
+												<div class="ident-bot-14">
+												   <img class="fleft image-border-1 ident-right-2" src="images/gracia2.jpg" alt="PROYECTOS DE REFORMA INTERIOR" style="display: block; border: 1px solid white"/>
+													<div class="extra-wrap inner-ident-top-1">	
+																	<br><br>	
+																	<p>Tras reunirnos con el cliente y visitar el espacio,  recogemos todas las necesidades y requisitos.
+														Una vez aprobado el plan de trabajo,  el proyecto empieza a tomar forma primero en un plano
+														de distribución, para ir dotándolo después de imágenes que ayudarán a proyectar el resultado.
+														Si se trata de un Reforma,  el proyecto se desarrollará según su alcance, generando los
+														bocetos, planos de instalaciones y detalles, además de una memoria de calidades con los
+														materiales a utilizar. Todo ello se proporcionará a la empresa constructora para elaborar un
+														presupuesto que contemple las partidas.</p><br><br><br><br><br>
+														
+													</div>
+												</div>
 											
 											<div class="ident-bot-14">
 												<img class="fleft image-border-1 ident-right-2" src="images/colores.jpg" alt="PROYECTOS DE REFORMA INTERIOR" style="display: block; width: 252px; height: 205px;  border: 1px solid white"/>
@@ -96,7 +102,7 @@
 											ajustado a un presupuesto aprobado, esto que incluye:
 											
 											<div class="ident-bot-14">
-												<img class="fleft image-border-1 ident-right-2" src="images/telas.jpg" alt="PROYECTOS DE REFORMA INTERIOR" style="display: block; width: 252px; height: 205px;  border: 1px solid white"/>
+												<img class="fleft image-border-1 ident-right-2" src="images/mix.jpg" alt="PROYECTOS DE REFORMA INTERIOR" style="display: block; width: 252px; height: 205px;  border: 1px solid white"/>
 																<div class="extra-wrap inner-ident-top-1">
 																	
 																	- Pintura, empapelados, alfombras y moquetas.<br>
