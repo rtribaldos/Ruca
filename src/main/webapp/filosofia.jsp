@@ -62,7 +62,8 @@
 											elección cuidada de los materiales y un diseño específico de los elementos que los conforman.
 											<br/>Más de 15 años de experiencia transformando espacios avalan nuestro trabajo. Contamos para
 											ello con un equipo de excelentes profesionales .
-											Centrados sobre todo en el ámbito residencial, las empresas también cuentan con nosotros.</p>
+											Centrados sobre todo en el ámbito residencial, las empresas también cuentan con nosotros para diseñar 
+											sus oficinas.</p>
 											<br/>
 						
 											<p style='font:14px/21px "Trebuchet MS", Helvetica, sans-serif; color: #b4b08c;'>METODO DE TRABAJO</p><hr/>
@@ -73,10 +74,10 @@
 																	<p>Tras reunirnos con el cliente y visitar el espacio,  recogemos todas las necesidades y requisitos.
 														Una vez aprobado el plan de trabajo,  el proyecto empieza a tomar forma primero en un plano
 														de distribución, para ir dotándolo después de imágenes que ayudarán a proyectar el resultado.
-														Si se trata de un Reforma,  el proyecto se desarrollará según su alcance, generando los
+														Si se trata de una reforma,  el proyecto se desarrollará según su alcance, generando los
 														bocetos, planos de instalaciones y detalles, además de una memoria de calidades con los
 														materiales a utilizar. Todo ello se proporcionará a la empresa constructora para elaborar un
-														presupuesto que contemple las partidas.</p><br><br><br><br><br>
+														presupuesto.</p><br><br><br><br><br>
 														
 													</div>
 												</div>
@@ -90,16 +91,18 @@
 																	- Puertas de paso y armarios, manivelas y pomos.<BR>
 																	- Distribución interior de armarios, diseño de librerías y mobiliario a medida<BR>
 																	- Mobiliario de cocina.
+																	<p>Se puede además realizar el seguimiento de la obra hasta su finalización para garantizar que
+											se haga lo proyectado o realizar posibles cambios.</p>
+											
 																</div>
 																<div class="clear"></div>
 											</div>
 											
-											<p>Se puede además realizar el seguimiento de la obra hasta su finalización para garantizar que
-											se haga lo proyectado o realizar posibles cambios.
-											<BR>
-											Si  se requiere la Decoración del espacio, tras la revisión de lo ya existente y el análisis de la
-											distribución del espacio, se asesora en la elección de todo el mobiliario adecuado siempre
-											ajustado a un presupuesto aprobado, esto que incluye:
+											
+											<p>
+											Si  se requiere la Decoración de la vivienda, tras la revisión de lo ya existente y el análisis de la
+											distribución del espacio, se asesora en la elección de todo el mobiliario, siempre
+											ajustado al presupuesto aprobado por el cliente:
 											
 											<div class="ident-bot-14">
 												<img class="fleft image-border-1 ident-right-2" src="images/mix.jpg" alt="PROYECTOS DE REFORMA INTERIOR" style="display: block; width: 252px; height: 205px;  border: 1px solid white"/>
