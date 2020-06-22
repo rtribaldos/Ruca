@@ -26,7 +26,7 @@
 			<header>
 				<div class="wrapper block-1">
 					<div>
-						<h1><img src="images/logoT2.png" /></h1>
+						<a href="/"><h1><img src="images/logoT2.png" /></h1></a>
 					</div>
 				</div>
 				
