@@ -122,6 +122,7 @@
 			
 		<!-- content -->
 		 <div class="wrapper">
+		 		<BR>
 				<div class="grid_12">
 					<div class="flexslider ident-bot-2">
 						<ul class="slides">
@@ -131,7 +132,7 @@
 							%>
 							
 							<li>
-								<img src="<%=foto.getURLPath() %>" alt="" width="960px" height="653px">
+								<img src="<%=foto.getURLPath() %>" alt="">
 							</li>
 							<%
 								}
@@ -146,7 +147,7 @@
 							
 						</ul>
 						
-						<br>
+						<br><BR>
 						<hr>
 							<div class="grid_4">
 								<p style='font:11px/21px "Trebuchet MS", Helvetica, sans-serif;'>C/ Salv&aacute; 8, 5&ordm;-9 - Valencia  963 253 539 / 609 855 196</p>
